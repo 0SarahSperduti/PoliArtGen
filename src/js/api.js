@@ -1,0 +1,1 @@
+// funcoes para integrar com a api de ia
