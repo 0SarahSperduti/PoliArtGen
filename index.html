@@ -1,15 +1,83 @@
+<!-- pagina inicial (formulario para gerar imagem) -->
+<!DOCTYPE html>
+<html lang="pt-br">
 
-  <!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>PoliArtGen</title>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <title>PoliArtGen</title>
+    <link rel="stylesheet" href="src/css/style_telas.css"> <!-- arquivo css externo -->
+</head>
 
-    <body>
-      <div id="root"></div>
-      <script type="module" src="/src/main.tsx"></script>
-    </body>
-  </html>
-  
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="logo">PoliArtGen</div>
+        <ul class="nav-links">
+            <li><a href="#">Gerador</a></li>
+            <li><a href="#">Histórico</a></li>
+            <li><a href="#">Perfil</a></li>
+            <li><a href="#">Sair</a></li>
+        </ul>
+    </nav>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="container">
+        <!-- Coluna esquerda: Formulário -->
+        <section class="formulario">
+            <h2>Criar Ilustração</h2>
+
+            <form>
+                <label for="materia">Matéria</label>
+                <select id="materia">
+                    <option>Física</option>
+                    <option>Matemática</option>
+                    <option>Biologia</option>
+                    <option>História</option>
+                    <option>Geografia</option>
+                    <option>Química</option>
+                </select>
+
+                <label for="estilo">Estilo da Imagem</label>
+                <select id="estilo">
+                    <option>Realista</option>
+                    <option>Cartoon</option>
+                    <option>Minimalista</option>
+                    <option>Esquemático</option>
+                    <option>3D</option>
+                </select>
+
+                <label for="topico">Tópico Específico</label>
+                <input type="text" id="topico" placeholder="Ex: Lei de Ohm, Fotossíntese, Teorema de Pitágoras...">
+
+                <label for="nivel">Nível Educacional</label>
+                <select id="nivel">
+                    <option>Ensino Fundamental I</option>
+                    <option>Ensino Fundamental II</option>
+                    <option>Ensino Médio</option>
+                </select>
+
+                <label for="detalhes">Detalhes Adicionais</label>
+                <textarea id="detalhes"
+                    placeholder="Descrição adicional do que você gostaria de ver na imagem..."></textarea>
+
+                <button type="submit" class="btn-gerar">⚡ Gerar Ilustração</button>
+            </form>
+        </section>
+
+        <!-- Coluna direita: Resultado -->
+        <aside class="resultado">
+            <h2>Resultado</h2>
+            <div class="preview">
+                <p>Sua ilustração aparecerá aqui</p>
+                <small>Preencha o formulário e clique em "Gerar Ilustração"</small>
+            </div>
+        </aside>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2025 - Direitos Reservados</p>
+    </footer>
+</body>
+
+</html>
