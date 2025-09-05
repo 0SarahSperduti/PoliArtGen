@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br" id="login-page"> <!-- id para identificar a página de login -->
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login - PoliArtGen</title>
+    <link rel="stylesheet" href="src/css/style.css">
+</head>
+
+<body class="login-body"> <!-- class para estilização geral do body da página de login -->
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="logo">PoliArtGen</div>
+    </nav>
+
+    <!-- CONTEÚDO PRINCIPAL (formulário de login + imagem lado a lado) -->
+    <main class="login-container">
+
+        <!-- Coluna esquerda: caixa de login -->
+        <section class="login-card" id="login-box">
+            <h2>Bem-Vindo ao PoliArtGen</h2>
+
+            <!-- formulário de login -->
+            <form id="loginForm" class="login-form">
+                <!-- Usuário ou Email -->
+                <label for="usuario">Usuário</label>
+                <input type="text" id="usuario" name="usuario" placeholder="Digite seu usuário" required>
+
+                <!-- Senha -->
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+
+                <!-- Botão de Login -->
+                <button type="submit" class="btn-login">Entrar</button>
+            </form>
+
+            <!-- Links extras abaixo do formulário -->
+            <div class="login-links">
+                <a href="#">Esqueci minha senha</a>
+                <span> | </span>
+                <a href="#">Criar conta</a>
+            </div>
+        </section>
+
+        <!-- Coluna direita: imagem ilustrativa -->
+        <div class="login-img" id="login-image">
+            <img src="src/img/mascote_poliartgen.png" alt="Imagem ilustrativa do PoliArtGen">
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer-login">
+        <p>&copy; 2025 - Direitos Reservados</p>
+    </footer>
+
+    <!-- SCRIPT DE VALIDAÇÃO FAKE (pode ser movido para src/js/login.js futuramente) -->
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function (e) {
+            e.preventDefault(); // evita recarregar a página
+
+            const usuario = document.getElementById("usuario").value;
+            const senha = document.getElementById("senha").value;
+
+            // autenticação fake apenas para teste
+            if (usuario === "admin" && senha === "1234") {
+                window.location.href = "pag_principal.html"; // redireciona para tela principal
+            } else {
+                alert("Usuário ou senha inválidos!");
+            }
+        });
+    </script>
+</body>
+
+</html>

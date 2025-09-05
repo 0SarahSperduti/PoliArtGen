@@ -1,0 +1,308 @@
+/* RESET BÁSICO */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: #333;
+}
+
+/* NAVBAR */
+.navbar {
+    width: 100%;
+    background: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 40px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.navbar .logo {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ff9800;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.nav-links li a:hover {
+    color: #ff9800;
+}
+
+/* ---------------------------- */
+/* ESTILO DA PÁGINA PRINCIPAL   */
+/* ---------------------------- */
+#principal-page .principal-body {
+    background-color: #12b6c9; /* fundo turquesa */
+}
+
+/* Container principal: form + resultado lado a lado */
+#main-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    padding: 40px;
+    flex: 1;
+}
+
+/* Formulário */
+#form-gerador {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    padding: 20px;
+    flex: 1;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+#form-gerador h2 {
+    background: #ff9800;
+    color: #fff;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+#form-gerador form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#form-gerador label {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+#form-gerador input,
+#form-gerador select,
+#form-gerador textarea {
+    padding: 10px;
+    border: 1px solid #ff9800;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+#form-gerador textarea {
+    resize: none;
+    min-height: 80px;
+}
+
+/* Botão gerar */
+#btn-gerar {
+    background: #ff9800;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#btn-gerar:hover {
+    background: #e68900;
+}
+
+/* Resultado */
+#resultado-geracao {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    padding: 20px;
+    flex: 1;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+#resultado-geracao h2 {
+    background: #ff9800;
+    color: #fff;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+#preview-img {
+    flex: 1;
+    border: 2px dashed #ff9800;
+    border-radius: 8px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #555;
+}
+
+/* ---------------------------- */
+/* ESTILO DA PÁGINA DE LOGIN    */
+/* ---------------------------- */
+#login-page .login-body {
+    background-color: #12b6c9; /* mesmo fundo da principal */
+}
+
+.login-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    padding: 40px;
+}
+
+/* Card do formulário */
+#login-box {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+#login-box h2 {
+    background: #ff9800;
+    color: #fff;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    text-align: left;
+}
+
+.login-form label {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.login-form input {
+    padding: 10px;
+    border: 1px solid #ff9800;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+/* Botão de login */
+.btn-login {
+    background: #ff9800;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+
+.btn-login:hover {
+    background: #e68900;
+}
+
+/* Links abaixo do form */
+.login-links {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.login-links a {
+    text-decoration: none;
+    color: #ff9800;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.login-links a:hover {
+    text-decoration: underline;
+}
+
+/* Coluna da imagem no login */
+#login-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#login-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* ---------------------------- */
+/* FOOTER (comum para as duas)  */
+/* ---------------------------- */
+footer {
+    text-align: center;
+    padding: 15px;
+    background: #fff;
+    box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
+    font-size: 14px;
+}
+
+/* ---------------------------- */
+/* RESPONSIVIDADE               */
+/* ---------------------------- */
+@media (max-width: 768px) {
+    /* Empilhar colunas no login */
+    .login-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    #login-box {
+        max-width: 100%;
+    }
+
+    #login-image img {
+        max-width: 80%;
+    }
+
+    /* Empilhar colunas na principal */
+    #main-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    #form-gerador,
+    #resultado-geracao {
+        max-width: 100%;
+    }
+}
