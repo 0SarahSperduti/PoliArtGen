@@ -1,1 +1,0 @@
-// logica prncipal (captura do formulario, api, exibe resultado)
