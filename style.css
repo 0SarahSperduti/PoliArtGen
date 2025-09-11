@@ -1,0 +1,472 @@
+/* RESET BÁSICO */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: #333;
+}
+
+/* NAVBAR */
+.navbar {
+    width: 100%;
+    background: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 40px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.navbar .logo {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ff9800;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.nav-links li a:hover {
+    color: #ff9800;
+}
+
+/* ---------------------------- */
+/* ESTILO DA PÁGINA PRINCIPAL   */
+/* ---------------------------- */
+#principal-page .principal-body {
+    background-color: #12b6c9; /* fundo turquesa */
+}
+
+/* Container principal: form + resultado lado a lado */
+#main-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    padding: 40px;
+    flex: 1;
+}
+
+/* Formulário */
+#form-gerador {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    padding: 20px;
+    flex: 1;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+#form-gerador h2 {
+    background: #ff9800;
+    color: #fff;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+#form-gerador form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#form-gerador label {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+#form-gerador input,
+#form-gerador select,
+#form-gerador textarea {
+    padding: 10px;
+    border: 1px solid #ff9800;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+#form-gerador textarea {
+    resize: none;
+    min-height: 80px;
+}
+
+/* Botão gerar */
+#btn-gerar {
+    background: #ff9800;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#btn-gerar:hover {
+    background: #e68900;
+}
+
+/* Resultado */
+#resultado-geracao {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    padding: 20px;
+    flex: 1;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+#resultado-geracao h2 {
+    background: #ff9800;
+    color: #fff;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+#preview-img {
+    flex: 1;
+    border: 2px dashed #ff9800;
+    border-radius: 8px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #555;
+}
+
+/* ---------------------------- */
+/* ESTILO DA PÁGINA DE LOGIN    */
+/* ---------------------------- */
+#login-page .login-body {
+    background-color: #12b6c9; /* mesmo fundo da principal */
+}
+
+.login-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    padding: 40px;
+}
+
+/* Card do formulário */
+#login-box {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+#login-box h2 {
+    background: #ff9800;
+    color: #fff;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    text-align: left;
+}
+
+.login-form label {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.login-form input {
+    padding: 10px;
+    border: 1px solid #ff9800;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+/* Botão de login */
+.btn-login {
+    background: #ff9800;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+
+.btn-login:hover {
+    background: #e68900;
+}
+
+/* Links abaixo do form */
+.login-links {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.login-links a {
+    text-decoration: none;
+    color: #ff9800;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.login-links a:hover {
+    text-decoration: underline;
+}
+
+/* Coluna da imagem no login */
+#login-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#login-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* ---------------------------- */
+/* FOOTER (comum para as duas)  */
+/* ---------------------------- */
+footer {
+    text-align: center;
+    padding: 15px;
+    background: #fff;
+    box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
+    font-size: 14px;
+}
+
+/* ---------------------------- */
+/* RESPONSIVIDADE               */
+/* ---------------------------- */
+@media (max-width: 768px) {
+    /* Empilhar colunas no login */
+    .login-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    #login-box {
+        max-width: 100%;
+    }
+
+    #login-image img {
+        max-width: 80%;
+    }
+
+    /* Empilhar colunas na principal */
+    #main-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    #form-gerador,
+    #resultado-geracao {
+        max-width: 100%;
+    }
+}
+
+/* cores para a tela perfil */
+/* -------------------------------------------------- */
+/* --- ESTILO DA PÁGINA DE PERFIL (Dark Mode) --- */
+/* -------------------------------------------------- */
+
+/* Fundo escuro APENAS na página de perfil */
+#perfil-page body {
+    background-color: #12b6c9; 
+    color: #f0f0f0; /* Texto principal claro */
+}
+
+
+#perfil-page .perfil-container {
+    background-color: #f0f0f0; 
+    padding: 40px;
+    border-radius: 16px;
+    border: 1px solid #4a4a6a; /* Borda sutil */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 800px;
+    margin: 40px auto; /* Centraliza vertical e horizontalmente */
+}
+
+/* Estilo para a área da foto (avatar) */
+#perfil-page .perfil-avatar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+#perfil-page .perfil-avatar img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid #12b6c9; /* Roxo vibrante da inspiração */
+    margin-bottom: 15px;
+}
+
+#perfil-page .btn-alterar-foto {
+    background: transparent;
+    border: 1px solid #12b6c9;
+    color: #12b6c9;
+    padding: 8px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+#perfil-page .btn-alterar-foto:hover {
+    background-color: #9c27b0;
+    color: #fff;
+}
+
+/* Títulos das seções (com ícones) */
+#perfil-page h2, #perfil-page h3.separador-form {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Espaço entre o ícone e o texto */
+    color: black;
+    font-size: 22px;
+    border-bottom: 1px solid #4a4a6a;
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+}
+
+/* Inputs e Labels com visual dark */
+#perfil-page #form-perfil label {
+    font-weight: 500;
+    font-size: 14px;
+    color: black; 
+    margin-bottom: 5px;
+}
+
+#perfil-page #form-perfil input {
+    background-color: #e68900; 
+    border: 1px solid #4a4a6a;
+    color: #f0f0f0;
+    align-items: center;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+#perfil-page #form-perfil input:focus {
+    outline: none;
+    border-color: #9c27b0; /* Borda roxa ao focar */
+}
+
+#perfil-page #form-perfil input[readonly] {
+    background-color: #e68900;
+    
+    
+}
+
+/* Botão de Salvar com gradiente */
+#perfil-page .btn-salvar {
+    background: linear-gradient(45deg, #9c27b0, #00bcd4); /* Gradiente Roxo -> Ciano */
+    color: #fff;
+    border: none;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-top: 20px;
+    align-self: center;
+
+     /* --- ADICIONE ESTAS 4 LINHAS PARA CENTRALIZAR --- */
+     display: block;          /* 1. Transforma o botão em um bloco */
+     width: fit-content;      /* 2. Faz o botão ter a largura do seu conteúdo */
+     margin-left: auto;       /* 3. Mágica da centralização */
+     margin-right: auto;      /* 4. Mágica da centralização */
+ }
+
+
+#perfil-page .btn-salvar:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 20px rgba(156, 39, 176, 0.4);
+}
+
+/* Zona de Perigo com estilo de alerta */
+#perfil-page .danger-zone {
+    margin-top: 40px;
+    border: 1px solid #c70039; /* Vermelho escuro */
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    background-color: rgba(199, 0, 57, 0.1); /* Fundo vermelho transparente */
+}
+
+#perfil-page .danger-zone h3 {
+    color: #ff8fab; /* Rosa/vermelho claro */
+    margin: 0 0 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+#perfil-page .danger-zone p {
+    color: #aaa;
+    margin-bottom: 15px;
+}
+
+#perfil-page .btn-excluir {
+    background-color: #c70039;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#perfil-page .btn-excluir:hover {
+    background-color: #9f002d;
+}
