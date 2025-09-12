@@ -307,27 +307,25 @@ footer {
     }
 }
 
-/* cores para a tela perfil */
 /* -------------------------------------------------- */
-/* --- ESTILO DA PÁGINA DE PERFIL (Dark Mode) --- */
+/* --- ESTILO DA PÁGINA DE PERFIL (Tema Claro) --- */
 /* -------------------------------------------------- */
 
-/* Fundo escuro APENAS na página de perfil */
+
 #perfil-page body {
     background-color: #12b6c9; 
-    color: #f0f0f0; /* Texto principal claro */
+    color: #333; 
 }
 
-
+/* Container principal do perfil como um card branco */
 #perfil-page .perfil-container {
-    background-color: #f0f0f0; 
+    background-color: #fff; 
     padding: 40px;
     border-radius: 16px;
-    border: 1px solid #4a4a6a; /* Borda sutil */
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
     width: 100%;
     max-width: 800px;
-    margin: 40px auto; /* Centraliza vertical e horizontalmente */
+    margin: 40px auto;
 }
 
 /* Estilo para a área da foto (avatar) */
@@ -343,14 +341,14 @@ footer {
     height: 140px;
     border-radius: 50%;
     object-fit: cover;
-    border: 5px solid #12b6c9; /* Roxo vibrante da inspiração */
+    border: 5px solid #ff9800; 
     margin-bottom: 15px;
 }
 
 #perfil-page .btn-alterar-foto {
     background: transparent;
-    border: 1px solid #12b6c9;
-    color: #12b6c9;
+    border: 1px solid #ff9800;
+    color: #ff9800;
     padding: 8px 20px;
     border-radius: 20px;
     cursor: pointer;
@@ -359,7 +357,7 @@ footer {
 }
 
 #perfil-page .btn-alterar-foto:hover {
-    background-color: #9c27b0;
+    background-color: #ff9800; 
     color: #fff;
 }
 
@@ -367,47 +365,56 @@ footer {
 #perfil-page h2, #perfil-page h3.separador-form {
     display: flex;
     align-items: center;
-    gap: 20px; /* Espaço entre o ícone e o texto */
-    color: black;
+    gap: 12px;
+    color: #333; 
     font-size: 22px;
-    border-bottom: 1px solid #4a4a6a;
+    border-bottom: 1px solid #eee; 
     padding-bottom: 10px;
     margin-bottom: 25px;
+    margin-top: 40px; 
 }
 
-/* Inputs e Labels com visual dark */
+/* Inputs e Labels com o estilo padrão do site */
 #perfil-page #form-perfil label {
     font-weight: 500;
     font-size: 14px;
-    color: black; 
+    color: #555; 
     margin-bottom: 5px;
 }
 
 #perfil-page #form-perfil input {
-    background-color: #e68900; 
-    border: 1px solid #4a4a6a;
-    color: #f0f0f0;
-    align-items: center;
+    background-color: #f5f5f5;
+    border: 3px solid #ff9800; 
+    color: #333; 
     padding: 12px;
     border-radius: 8px;
     font-size: 16px;
-    transition: border-color 0.3s ease;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
+
 
 #perfil-page #form-perfil input:focus {
     outline: none;
-    border-color: #9c27b0; /* Borda roxa ao focar */
+    border-color: #ff9800; 
+    box-shadow: 0 0 0 3px rgba(255, 152, 0, 0.2); 
 }
 
 #perfil-page #form-perfil input[readonly] {
-    background-color: #e68900;
-    
-    
+    background-color: #f5f5f5;
+    border-color: #ff9800; 
+    cursor: not-allowed;
+}
+/* Ajuste para o texto de ajuda (small) */
+#perfil-page .texto-ajuda {
+    display: block;
+    margin-top: 5px;
+    color: #666;
 }
 
-/* Botão de Salvar com gradiente */
+
+
 #perfil-page .btn-salvar {
-    background: linear-gradient(45deg, #9c27b0, #00bcd4); /* Gradiente Roxo -> Ciano */
+    background: linear-gradient(45deg, #9c27b0, #00bcd4);
     color: #fff;
     border: none;
     padding: 15px;
@@ -415,35 +422,36 @@ footer {
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
     margin-top: 20px;
     align-self: center;
+    width: fit-content;
+    padding-left: 30px;
+    padding-right: 30px;
 
-     /* --- ADICIONE ESTAS 4 LINHAS PARA CENTRALIZAR --- */
-     display: block;          /* 1. Transforma o botão em um bloco */
-     width: fit-content;      /* 2. Faz o botão ter a largura do seu conteúdo */
-     margin-left: auto;       /* 3. Mágica da centralização */
-     margin-right: auto;      /* 4. Mágica da centralização */
- }
-
-
-#perfil-page .btn-salvar:hover {
-    transform: scale(1.03);
-    box-shadow: 0 4px 20px rgba(156, 39, 176, 0.4);
+    display: block;          
+    width: fit-content;      
+    margin-left: auto;       
+    margin-right: auto;      
 }
 
-/* Zona de Perigo com estilo de alerta */
+#perfil-page .btn-salvar:hover {
+    background-color: #e68900; 
+    transform: scale(1.03);
+}
+
+
 #perfil-page .danger-zone {
     margin-top: 40px;
-    border: 1px solid #c70039; /* Vermelho escuro */
+    border: 1px solid #dc3545;
     border-radius: 8px;
     padding: 20px;
     text-align: center;
-    background-color: rgba(199, 0, 57, 0.1); /* Fundo vermelho transparente */
+    background-color: rgba(220, 53, 69, 0.05);
 }
 
 #perfil-page .danger-zone h3 {
-    color: #ff8fab; /* Rosa/vermelho claro */
+    color: #dc3545;
     margin: 0 0 10px 0;
     display: flex;
     align-items: center;
@@ -452,12 +460,12 @@ footer {
 }
 
 #perfil-page .danger-zone p {
-    color: #aaa;
+    color: #666;
     margin-bottom: 15px;
 }
 
 #perfil-page .btn-excluir {
-    background-color: #c70039;
+    background-color: #dc3545;
     color: #fff;
     padding: 10px 20px;
     border: none;
@@ -468,5 +476,5 @@ footer {
 }
 
 #perfil-page .btn-excluir:hover {
-    background-color: #9f002d;
+    background-color: #c82333;
 }
