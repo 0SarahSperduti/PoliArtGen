@@ -306,3 +306,135 @@ footer {
         max-width: 100%;
     }
 }
+
+/* ------------------------------------------- */
+/* --- ESTILO DA PÁGINA DE HISTÓRICO --- */
+/* ------------------------------------------- */
+
+/* Fundo azul padrão para a página de histórico */
+#historico-page body {
+    background-color: #12b6c9;
+}
+
+/* Container principal em formato de card branco */
+.historico-container {
+    background-color: #fff;
+    padding: 30px 40px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 900px; /* Um pouco mais largo para caber a lista confortavelmente */
+    margin: 40px auto;
+}
+
+/* Título da página de histórico */
+.historico-container h2 {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #333;
+    font-size: 24px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+}
+
+/* Estilo para cada item individual da lista de histórico */
+.historico-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #f8f9fa; /* Fundo cinza bem claro para cada item */
+    border: 1px solid #dee2e6;
+    margin-bottom: 15px;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.historico-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Miniatura da imagem */
+.item-imagem img {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 3px solid #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Detalhes do item (título, usuário, data) */
+.item-detalhes {
+    flex: 1; /* Faz esta seção ocupar o espaço restante no meio */
+}
+
+.item-detalhes h4 {
+    color: #333;
+    font-size: 18px;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.item-detalhes p {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.item-detalhes p strong {
+    color: #333;
+}
+
+/* Seção de ações (botão de download) */
+.btn-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: transparent;
+    border: 2px solid #ff9800;
+    color: #ff9800;
+    font-weight: bold;
+    padding: 8px 15px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    white-space: nowrap; /* Evita que o texto do botão quebre linha */
+}
+
+.btn-download:hover {
+    background-color: #ff9800;
+    color: #fff;
+}
+
+/* --- Responsividade para a página de Histórico --- */
+@media (max-width: 768px) {
+    .historico-item {
+        flex-direction: column; /* Empilha os itens verticalmente no celular */
+        align-items: flex-start; /* Alinha tudo à esquerda */
+        padding: 20px;
+    }
+
+    .item-imagem img {
+        width: 100%;
+        height: 180px; /* Imagem maior no modo coluna */
+        margin-bottom: 15px;
+    }
+
+    .item-acoes {
+        align-self: flex-end; /* Joga o botão para a direita */
+        margin-top: 10px;
+    }
+}
+
+/* Adicione esta classe ao seu CSS para destacar o link ativo na navbar */
+.nav-links .active {
+    color: #ff9800;
+    font-weight: bold;
+}
