@@ -1,5 +1,5 @@
 // Conexão com um banco de dados
-require('dotenv').config();
+require('dotenv').config({ path: '../../.env' });
 const mysql = require('mysql2');
 
 // Carrega as variáveis de ambiente
