@@ -1,36 +1,32 @@
-// Conexão com um banco de dados
-require('dotenv').config({ path: '../../.env' });
-const mysql = require('mysql2');
+const path = require('path');
+const mongoose = require('mongoose');
 
-// Carrega as variáveis de ambiente
-const HOST = process.env.HOST;
-const PORT = process.env.PORT;
-const USER = process.env.USER;
-const PASSWORD = process.env.DB_PASSWORD;
-const DATABASE = process.env.DATABASE;
-const SSL_CA = process.env.SSL_CA;
+require('dotenv').config({path:path.resolve(__dirname, '..', '..', '.env')});
 
-// Apenas para fins de depuração, como no seu código Python
-console.log(`HOST=${HOST}`);
-console.log(`PORT=${PORT}`);
-console.log(`USER=${USER}`);
-console.log(`PASSWORD=${PASSWORD}`);
-console.log(`DATABASE=${DATABASE}`);
+// Pega a URI de conexão
+const MONGO_URI = process.env.MONGO_URI;
+// Retirar depois, parte dos testes
+console.log(`MONGO_URI=${MONGO_URI}`);
+
 
 /**
- * Cria e retorna uma conexão com o banco de dados.
+ * Estabelece e mantém a conexão com o banco de dados.
  */
-function getConnection() {
-  return mysql.createConnection({
-    host: HOST,
-    port: parseInt(PORT),
-    user: USER,
-    password: PASSWORD,
-    database: DATABASE,
-    ssl: {
-        ca: SSL_CA
-    }
-  });
+
+async function connectDB() {
+  if (!MONGO_URI){
+    console.error("ERRO: MONGO_URI não está definida no arquivo .env");
+    process.exit(1);
+  }
+
+  try {
+    await mongoose.connect(MONGO_URI)
+    
+    console.log('Conexão com o MongoDB bem-sucedida')
+  } catch(error){
+    console.error('Erro ao conectar ao MongoDB:', error.message);
+    process.exit(1);
+  }
 }
 
-module.exports = getConnection;
+module.exports = connectDB;
