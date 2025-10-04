@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - PoliArtGen</title>
+    <link rel="stylesheet" href="src/css/style.css">
+    <link rel="icon" href="src/img/mascote_poliartgen.png" type="image/png">
+</head>
+
+<body class="gradiente-background"> <!-- classe para o fundo gradiente -->
+    <!-- Container principal -->
+    <main class="login-container">
+
+        <!-- Espaço para o logo -->
+        <div class="logo">
+            <!-- <img src="src/img/poliedro-logo.webp" alt="Logo Poliedro"> -->
+        </div>
+
+        <!-- Título e subtítulo -->
+        <h1 class="title-container">Entre na sua conta</h1>
+
+        <!-- colocar isso dentro do contrainer - 25 e 26 -->
+        <!-- <h1>PoliArtGen</h1> -->
+        <!-- <p>Crie ilustrações incríveis com IA</p> -->
+
+        <!-- Formulário -->
+        <form id="loginForm" class="login-form">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+
+            <label for="senha">Senha</label>
+            <input type="password" id="senha" name="senha" placeholder="********" required>
+
+            <!-- Opções extras -->
+            <div class="login-options">
+                <label><input type="checkbox" name="lembrar"> Lembrar de mim</label>
+                <a href="#">Esqueceu a senha?</a>
+            </div>
+
+            <!-- Botão login -->
+            <button type="submit" class="btn-login">Entrar</button>
+        </form>
+
+        <!-- Cadastro -->
+        <div class="signup">
+            Não tem uma conta? <a href="#">Cadastre-se</a>
+        </div>
+    </main>
+
+    <!-- Script de teste -->
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function (e) {
+          e.preventDefault(); // evita recarregar a página
+      
+          const email = document.getElementById("email").value;
+          const senha = document.getElementById("senha").value;
+      
+          // Exemplo simples: validação fake
+          if (email === "admin@email.com" && senha === "1234") {
+            window.location.href = "pag_principal.html"; 
+          } else {
+            alert("Usuário ou senha inválidos!");
+          }
+        });
+      </script>
+      
+</body>
+
+</html>
