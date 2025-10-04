@@ -1,0 +1,592 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+/* TELA DE LOGIN */
+/* Fundo degradê */
+.gradiente-background {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #1eb4c3, #fba41f);
+}
+
+/* Container principal */
+.login-container {
+  background: #fff;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
+  width: 360px;
+  text-align: center;
+}
+
+/* Espaço do logo */
+.logo {
+  margin-bottom: 15px;
+}
+
+.logo img {
+  width: 60px;
+  height: auto;
+}
+
+/* Título e subtítulo */
+.login-container h1 {
+  font-size: 24px;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.login-container p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 25px;
+}
+
+/* Inputs */
+.login-container input[type="email"],
+.login-container input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  font-size: 14px;
+  transition: border 0.3s;
+}
+
+.login-container input:focus {
+  border-color: #00c2a8;
+}
+
+/* Opções de login */
+/* esqueceu a senha */
+.login-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: left;
+  font-size: 13px;
+  margin-bottom: 20px;
+}
+
+.login-options label {
+  display: flex;
+  align-items: left;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.login-options a {
+  color: #fba41f;
+  text-decoration: none;
+}
+
+.login-options a:hover {
+  text-decoration: underline;
+}
+
+/* Botão */
+.btn-login {
+  width: 100%;
+  padding: 12px;
+  background: #fba41f;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-login:hover {
+  background: #fba41f;
+}
+
+/* Link cadastro */
+.signup {
+  margin-top: 15px;
+  font-size: 14px;
+}
+/* link cadastre-se */
+.signup a {
+  color: #fba41f;
+  text-decoration: none;
+}
+
+.signup a:hover {
+  text-decoration: underline;
+}
+
+/* TELA PRINCIPAL */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body.principal-body {
+  background: linear-gradient(135deg, #1eb4c3, #fba41f);
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* NAVBAR */
+.navbar {
+  width: 100%;
+  background-color: #ffffff;
+  padding: 12px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #eee;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.nav-links li {
+  display: flex;
+  align-items: center;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  font-size: 1rem;
+  color: #444;
+  padding: 8px 16px;
+  border-radius: 20px;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-links li a.active {
+  background-color: #f59e0b; 
+  color: #fff ;
+  font-weight: 600;
+}
+
+.nav-links li a:hover {
+  color: #333;
+}
+
+.user-name {
+  margin: 0 12px;
+  font-weight: 500;
+  color: #333;
+}
+
+.logout {
+  color: #d61e49; 
+}
+
+.logout:hover {
+  color: #d61e49;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  padding: 40px 60px;
+  flex: 1;
+}
+
+/* ----- Formulário ----- */
+.formulario {
+  background: #fff;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.formulario h2 {
+  margin-bottom: 18px;
+  font-size: 1.3rem;
+  color: #1e293b;
+}
+
+.formulario label {
+  display: block;
+  font-weight: 500;
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+.formulario input,
+.formulario select,
+.formulario textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.formulario input:focus,
+.formulario select:focus,
+.formulario textarea:focus {
+  border-color: #2563eb;
+}
+
+.formulario textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.btn-gerar {
+  margin-top: 20px;
+  width: 100%;
+  padding: 12px;
+  background: #f59e0b; /* laranja */
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s;
+}
+
+.btn-gerar:hover {
+  background: #d97706;
+}
+
+/* ----- Resultado  ----- */
+.resultado {
+  background: #fff;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.resultado h2 {
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+  color: #1e293b;
+}
+
+.preview {
+  border: 2px dashed #f59e0b;
+  border-radius: 12px;
+  padding: 50px 20px;
+  color: #666;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.preview p {
+  font-size: 1rem;
+  color: #333;
+}
+
+.preview small {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+/* footer */
+.footer-principal {
+  background-color: #ffffff;
+  text-align: center;
+  padding: 15px;
+  border-top: 1px solid #ddd;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* responsividade - fazer alteracao.  */
+@media (max-width: 900px) {
+  .container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 20px;
+  }
+}
+
+/* TELA HISTORICO */
+#historico-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    background-color: #f5f6f8;
+    min-height: 100vh;
+}
+
+/* Article */
+#historico-article {
+    width: 90%;
+    max-width: 900px;
+    margin: auto;
+}
+
+/* Header */
+.historico-header {
+    margin-bottom: 20px;
+}
+
+.historico-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 5px;
+}
+
+.historico-subtitle {
+    font-size: 0.95rem;
+    color: #555;
+}
+
+/* Content */
+.historico-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.historico-box {
+    background-color: #fff;
+    padding: 40px 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    width: 100%;
+}
+
+/* Ícone central */
+.historico-icon {
+    margin-bottom: 15px;
+}
+
+.historico-icon img {
+    width: 60px;
+    height: 60px;
+    opacity: 0.7;
+}
+
+/* Textos */
+.historico-info {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.historico-instrucao {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* Botão */
+.historico-btn {
+    display: inline-block;
+    background-color: #f7941d;
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.historico-btn:hover {
+    background-color: #e6830f;
+}
+
+/* Footer */
+#historico-footer {
+    margin-top: auto;
+    padding: 15px;
+    background-color: #f5f6f8;
+    text-align: center;
+}
+
+.historico-footer-text {
+    font-size: 0.85rem;
+    color: #777;
+}
+
+/* TELA PERFIL */
+
+/* #perfil-body { */
+    /* background-color: #f5f6f8; */
+    /* font-family: Arial, sans-serif; */
+/* } */
+
+#perfil-main {
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+    min-height: 100vh;
+}
+
+#perfil-article {
+    width: 100%;
+    max-width: 800px;
+}
+
+/* Header */
+.perfil-header {
+    margin-bottom: 25px;
+}
+
+.perfil-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #222;
+}
+
+.perfil-subtitle {
+    font-size: 0.95rem;
+    color: #555;
+}
+
+/* Section */
+.perfil-section {
+    background: #fff;
+    padding: 25px;
+    margin-bottom: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+
+.perfil-section-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.perfil-section-subtitle {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* Avatar */
+.perfil-avatar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.avatar-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #56ccf2, #2f80ed);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    color: #fff;
+    font-weight: bold;
+    margin-right: 15px;
+}
+
+.avatar-info p {
+    margin: 2px 0;
+}
+
+.perfil-btn.secundario {
+    background: #eee;
+    color: #333;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.perfil-btn.secundario:hover {
+    background: #ddd;
+}
+
+/* Form */
+.perfil-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.perfil-form label {
+    font-size: 0.9rem;
+    margin: 8px 0 5px;
+    color: #333;
+}
+
+.perfil-form input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+}
+
+.perfil-btn.primario {
+    background-color: #f7941d;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.perfil-btn.primario:hover {
+    background-color: #e6830f;
+}
+
+/* Zona de perigo */
+/* deixar apenas o botao - excluir esse campo gigante */
+.danger-zone {
+    border: 1px solid #f5c6cb;
+    background: #fff5f5;
+}
+
+.perfil-warning {
+    background: #fff;
+    border: 1px solid #f5c6cb;
+    padding: 15px;
+    border-radius: 6px;
+    margin: 15px 0;
+    font-size: 0.9rem;
+    color: #721c24;
+}
+
+.perfil-btn.danger {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.perfil-btn.danger:hover {
+    background-color: #b52a37;
+}
