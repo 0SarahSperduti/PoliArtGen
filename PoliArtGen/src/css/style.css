@@ -4,6 +4,7 @@
   box-sizing: border-box;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
+
 /* TELA DE LOGIN */
 /* Fundo degradê */
 .gradiente-background {
@@ -113,6 +114,7 @@
   margin-top: 15px;
   font-size: 14px;
 }
+
 /* link cadastre-se */
 .signup a {
   color: #fba41f;
@@ -178,8 +180,8 @@ body.principal-body {
 }
 
 .nav-links li a.active {
-  background-color: #f59e0b; 
-  color: #fff ;
+  background-color: #f59e0b;
+  color: #fff;
   font-weight: 600;
 }
 
@@ -194,7 +196,7 @@ body.principal-body {
 }
 
 .logout {
-  color: #d61e49; 
+  color: #d61e49;
 }
 
 .logout:hover {
@@ -202,7 +204,9 @@ body.principal-body {
 }
 
 .container {
-  display: grid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   grid-template-columns: 1fr 1fr;
   gap: 40px;
   padding: 40px 60px;
@@ -257,7 +261,8 @@ body.principal-body {
   margin-top: 20px;
   width: 100%;
   padding: 12px;
-  background: #f59e0b; /* laranja */
+  background: #f59e0b;
+  /* laranja */
   border: none;
   border-radius: 10px;
   color: #fff;
@@ -327,266 +332,341 @@ body.principal-body {
   }
 }
 
-/* TELA HISTORICO */
+/* === TELA HISTÓRICO === */
+
 #historico-main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px;
-    background-color: #f5f6f8;
-    min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 60px 20px;
+  background-color: #f5f6f8;
+  min-height: 100vh;
 }
 
-/* Article */
+/* === ARTICLE === */
 #historico-article {
-    width: 90%;
-    max-width: 900px;
-    margin: auto;
+  width: 85%;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
-/* Header */
+/* === HEADER === */
 .historico-header {
-    margin-bottom: 20px;
+  text-align: center;
+  margin-bottom: 35px;
 }
 
 .historico-title {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #222;
-    margin-bottom: 5px;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 8px;
 }
 
 .historico-subtitle {
-    font-size: 0.95rem;
-    color: #555;
+  font-size: 1rem;
+  color: #666;
 }
 
-/* Content */
+/* === CONTAINER PRINCIPAL === */
 .historico-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+/* === CAIXA CENTRAL === */
 .historico-box {
-    background-color: #fff;
-    padding: 40px 20px;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-    width: 100%;
+  background-color: #fff;
+  padding: 50px 40px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 750px;
+  transition: all 0.3s ease;
 }
 
-/* Ícone central */
+.historico-box:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.1);
+}
+
+/* === ÍCONE CENTRAL === */
 .historico-icon {
-    margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .historico-icon img {
-    width: 60px;
-    height: 60px;
-    opacity: 0.7;
+  width: 70px;
+  height: 70px;
+  opacity: 0.75;
 }
 
-/* Textos */
+/* === TEXTOS === */
 .historico-info {
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 5px;
-    color: #333;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #333;
 }
 
 .historico-instrucao {
-    font-size: 0.95rem;
-    color: #666;
-    margin-bottom: 20px;
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 25px;
+  line-height: 1.5;
 }
 
-/* Botão */
+/* === BOTÃO === */
 .historico-btn {
-    display: inline-block;
-    background-color: #f7941d;
-    color: #fff;
-    padding: 12px 25px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.3s;
+  display: inline-block;
+  background-color: #f7941d;
+  color: #fff;
+  padding: 12px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
 
 .historico-btn:hover {
-    background-color: #e6830f;
+  background-color: #e6830f;
+  transform: scale(1.03);
 }
 
-/* Footer */
+/* === FOOTER === */
 #historico-footer {
-    margin-top: auto;
-    padding: 15px;
-    background-color: #f5f6f8;
-    text-align: center;
+  margin-top: auto;
+  padding: 20px 0;
+  background-color: #f5f6f8;
+  text-align: center;
 }
 
 .historico-footer-text {
-    font-size: 0.85rem;
-    color: #777;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+/* === HISTÓRICO COM ILUSTRAÇÕES === */
+
+.historico-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 25px;
+  background-color: #fff;
+  padding: 40px 30px;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 850px;
+  margin: 0 auto 40px auto;
+}
+
+.historico-card {
+  background-color: #fafafa;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.historico-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+}
+
+.historico-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.historico-card-info {
+  padding: 12px 15px;
+  text-align: left;
+}
+
+.historico-card-titulo {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.historico-card-data {
+  font-size: 0.9rem;
+  color: #777;
+}
+
+/* === BOTÃO FINAL === */
+.historico-btn-container {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.historico-btn-container .historico-btn {
+  font-size: 1rem;
+  padding: 12px 30px;
 }
 
 /* TELA PERFIL */
 
 /* #perfil-body { */
-    /* background-color: #f5f6f8; */
-    /* font-family: Arial, sans-serif; */
+/* background-color: #f5f6f8; */
+/* font-family: Arial, sans-serif; */
 /* } */
 
 #perfil-main {
-    display: flex;
-    justify-content: center;
-    padding: 30px;
-    min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+  min-height: 100vh;
 }
 
 #perfil-article {
-    width: 100%;
-    max-width: 800px;
+  width: 100%;
+  max-width: 800px;
 }
 
 /* Header */
 .perfil-header {
-    margin-bottom: 25px;
+  margin-bottom: 25px;
 }
 
 .perfil-title {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #222;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #222;
 }
 
 .perfil-subtitle {
-    font-size: 0.95rem;
-    color: #555;
+  font-size: 0.95rem;
+  color: #555;
 }
 
 /* Section */
 .perfil-section {
-    background: #fff;
-    padding: 25px;
-    margin-bottom: 25px;
-    border-radius: 10px;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  background: #fff;
+  padding: 25px;
+  margin-bottom: 25px;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }
 
 .perfil-section-title {
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: #333;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
 }
 
 .perfil-section-subtitle {
-    font-size: 0.9rem;
-    color: #666;
-    margin-bottom: 20px;
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 20px;
 }
 
 /* Avatar */
 .perfil-avatar {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .avatar-circle {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #56ccf2, #2f80ed);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.4rem;
-    color: #fff;
-    font-weight: bold;
-    margin-right: 15px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #56ccf2, #2f80ed);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  color: #fff;
+  font-weight: bold;
+  margin-right: 15px;
 }
 
 .avatar-info p {
-    margin: 2px 0;
+  margin: 2px 0;
 }
 
 .perfil-btn.secundario {
-    background: #eee;
-    color: #333;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 6px;
-    cursor: pointer;
+  background: #eee;
+  color: #333;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
 .perfil-btn.secundario:hover {
-    background: #ddd;
+  background: #ddd;
 }
 
 /* Form */
 .perfil-form {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .perfil-form label {
-    font-size: 0.9rem;
-    margin: 8px 0 5px;
-    color: #333;
+  font-size: 0.9rem;
+  margin: 8px 0 5px;
+  color: #333;
 }
 
 .perfil-form input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    margin-bottom: 15px;
-    font-size: 0.95rem;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  font-size: 0.95rem;
 }
 
 .perfil-btn.primario {
-    background-color: #f7941d;
-    color: #fff;
-    border: none;
-    padding: 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
+  background-color: #f7941d;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
 }
 
 .perfil-btn.primario:hover {
-    background-color: #e6830f;
+  background-color: #e6830f;
 }
 
 /* Zona de perigo */
 /* deixar apenas o botao - excluir esse campo gigante */
 .danger-zone {
-    border: 1px solid #f5c6cb;
-    background: #fff5f5;
+  border: 1px solid #f5c6cb;
+  background: #fff5f5;
 }
 
 .perfil-warning {
-    background: #fff;
-    border: 1px solid #f5c6cb;
-    padding: 15px;
-    border-radius: 6px;
-    margin: 15px 0;
-    font-size: 0.9rem;
-    color: #721c24;
+  background: #fff;
+  border: 1px solid #f5c6cb;
+  padding: 15px;
+  border-radius: 6px;
+  margin: 15px 0;
+  font-size: 0.9rem;
+  color: #721c24;
 }
 
 .perfil-btn.danger {
-    background-color: #dc3545;
-    color: #fff;
-    border: none;
-    padding: 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
 }
 
 .perfil-btn.danger:hover {
-    background-color: #b52a37;
+  background-color: #b52a37;
 }
