@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - PoliGen</title>
+    <link rel="stylesheet" href="src/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="gradiente-background">
+
+        <!-- Novo container do logo -->
+        <!-- <div class="logo">
+            <img src="src/img/poliedro-logo.webp" alt="Logo do Poliedro" class="logo-img">
+        </div> -->
+
+        <!-- Container principal de login/cadastro -->
+        <div class="login-container">
+            <h1>Crie sua conta</h1>
+            <p>Preencha os campos abaixo para se cadastrar</p>
+
+            <form id="cadastroForm" novalidate>
+                <label for="nome">Nome completo</label>
+                <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" required>
+
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required>
+
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+
+                <label for="confirmarSenha">Confirmar senha</label>
+                <input type="password" id="confirmarSenha" name="confirmarSenha" placeholder="Confirme sua senha"
+                    required>
+
+                <button type="submit" class="btn-login">Cadastrar</button>
+            </form>
+
+
+            <div class="signup">
+                <p>Já tem uma conta? <a href="pag_login.html">Faça login</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="cadastro.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
