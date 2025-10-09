@@ -28,7 +28,7 @@
 }
 
 /* Responsividade do container */
-@media (max-width: 768px) {
+@media (max-width: 1920px) {
   .login-container {
     padding: 2rem;
     width: 90%;
@@ -36,16 +36,33 @@
   }
 }
 
-/* Logo
-.logo {
+.login-header {
   display: flex;
-  justify-content: left;
+  align-items: center;
+  gap: 1rem;
+  justify-content: flex-start;
+}
+
+.logo-inline {
+  width: 120px;
+  height: auto;
+}
+
+.title-principal {
+  font-size: 2rem;
+  color: #333;
+  font-weight: 700;
+}
+
+.subtitle-login {
+  text-align: left;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #666;
+  margin-top: -1rem;
+  /* sobe o subtítulo para perto do título */
   margin-bottom: 1rem;
 }
-.logo-img {
-  width: clamp(140px, 30vw, 220px);
-  height: auto;
-} */
 
 
 /* TELA DE CADASTRO RESPONSIVA */
@@ -136,7 +153,7 @@
 }
 
 /* Responsividade do container */
-@media (max-width: 768px) {
+@media (max-width: 1920px) {
   .login-container {
     padding: 2rem;
     width: 90%;
@@ -316,25 +333,31 @@
   display: block;
   padding: 0.6rem 1rem;
   text-decoration: none;
-  color: #000; /* texto preto */
+  color: #000;
+  /* texto preto */
   font-weight: 600;
   border-radius: 10px;
   transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
-  background: #f9f9f9; /* cor neutra da caixa */
+  background: #f9f9f9;
+  /* cor neutra da caixa */
 }
 
 /* Link ativo */
 .nav-links li a.active {
-  background-color: #FFF7ED; /* destaque da aba ativa */
-  color: #333; /* texto permanece preto */
+  background-color: #FFF7ED;
+  /* destaque da aba ativa */
+  color: #333;
+  /* texto permanece preto */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   transform: translateY(-2px);
 }
 
 /* Hover nos links inativos */
 .nav-links li a:hover:not(.active) {
-  background-color: rgba(251, 164, 31, 0.3); /* fundo mais claro */
-  color: #333; /* texto preto */
+  background-color: rgba(251, 164, 31, 0.3);
+  /* fundo mais claro */
+  color: #333;
+  /* texto preto */
   transform: translateY(-1px);
 }
 
@@ -366,11 +389,11 @@
 
 /* tela gerador - tela principal  */
 /* container da direita */
-/* Container principal */
 #main-container {
   flex: 1;
   display: grid;
-  grid-template-columns: 2fr 1fr; /* deixa o formulário da esquerda maior */
+  grid-template-columns: 2fr 1fr;
+  /* deixa o formulário da esquerda maior */
   gap: 2rem;
   padding: 3rem 4rem;
   margin: 0 auto;
@@ -439,6 +462,29 @@
 .formulario label {
   font-weight: 600;
   color: #333;
+}
+
+.formulario,
+.resultado {
+  background: #fff;
+  border-radius: 1.8rem;
+  padding: 2.5rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 0;
+  width: 100%;
+}
+
+@media (max-width: 576px) {
+
+  .formulario,
+  .resultado {
+    padding: 1.8rem;
+    border-radius: 1.2rem;
+  }
 }
 
 .formulario select,
@@ -637,13 +683,19 @@
 /* ===================================== */
 
 #main-container {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  padding: 3rem 4rem;
-  max-width: 1300px;
+  width: clamp(320px, 95%, 1300px);
   margin: 0 auto;
+  flex: 1;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  padding: 3rem 4rem;
+  border-radius: 2rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  background: transparent;
+  /* ou branco, se necessário */
 }
+
 
 #historico-article {
   background: #fff;
@@ -657,16 +709,35 @@
   text-align: center;
 }
 
-/* Responsividade do container principal */
-@media (max-width: 992px) {
+/* Telas médias */
+@media (max-width: 1300px) {
   #main-container {
+    grid-template-columns: 1fr;
     padding: 2rem;
-  }
-
-  #historico-article {
-    padding: 2rem;
+    border-radius: 1.5rem;
   }
 }
+
+/* Telas pequenas */
+@media (max-width: 768px) {
+  #main-container {
+    padding: 1.5rem;
+    gap: 1.5rem;
+  }
+}
+
+/* Telas muito pequenas */
+@media (max-width: 480px) {
+  #main-container {
+    padding: 1.2rem;
+    border-radius: 1rem;
+  }
+}
+
+#historico-article {
+  padding: 2rem;
+}
+
 
 /* ===================================== */
 /* ======== CABEÇALHO DO HISTÓRICO ===== */
@@ -1095,9 +1166,8 @@
   }
 }
 
-* --- Container do botão logout --- */
-.logout-container {
-    position: absolute;
-    top: 20px;
-    right: 20px;
+* --- Container do botão logout --- */ .logout-container {
+  position: absolute;
+  top: 20px;
+  right: 20px;
 }
