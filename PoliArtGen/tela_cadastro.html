@@ -13,16 +13,19 @@
 <body>
     <div class="gradiente-background">
 
-        <!-- Novo container do logo -->
-        <!-- <div class="logo">
-            <img src="src/img/poliedro-logo.webp" alt="Logo do Poliedro" class="logo-img">
-        </div> -->
-
-        <!-- Container principal de login/cadastro -->
         <div class="login-container">
-            <h1>Crie sua conta</h1>
-            <p>Preencha os campos abaixo para se cadastrar</p>
+            <!-- Cabeçalho com logo + título -->
+            <div class="login-header" style="justify-content: center;">
+                <img src="src/img/mascote_poliartgen.png" alt="Logo PoliArtGen" class="logo-inline">
+                <h1 id="title-principal">PoliArtGen</h1>
+            </div>
 
+            <!-- Subtítulo reduzido -->
+            <p class="subtitle-login" style="text-align: center; font-size: 1rem; margin-top: -0.5rem;">
+                Crie sua conta
+            </p>
+
+            <!-- Formulário -->
             <form id="cadastroForm" novalidate>
                 <label for="nome">Nome completo</label>
                 <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" required>
@@ -40,11 +43,12 @@
                 <button type="submit" class="btn-login">Cadastrar</button>
             </form>
 
-
+            <!-- Link para login -->
             <div class="signup">
                 <p>Já tem uma conta? <a href="pag_login.html">Faça login</a></p>
             </div>
         </div>
+
     </div>
 
     <script src="cadastro.js"></script>

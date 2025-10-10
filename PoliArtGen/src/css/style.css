@@ -41,6 +41,7 @@
   align-items: center;
   gap: 1rem;
   justify-content: flex-start;
+  text-align: center;
 }
 
 .logo-inline {
@@ -48,7 +49,7 @@
   height: auto;
 }
 
-.title-principal {
+#title-principal {
   font-size: 2rem;
   color: #333;
   font-weight: 700;
@@ -1170,4 +1171,33 @@
   position: absolute;
   top: 20px;
   right: 20px;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo-img-navbar {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+}
+
+.logo-text {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #2d2e83;
+}
+
+/* Responsivo para telas pequenas */
+@media (max-width: 480px) {
+  .logo-img-navbar {
+    height: 32px;
+  }
+
+  .logo-text {
+    font-size: 1.1rem;
+  }
 }

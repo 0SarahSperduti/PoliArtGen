@@ -14,7 +14,10 @@
 <body class="principal-body">
     <!-- NAVBAR -->
     <nav class="navbar" id="navbar-principal">
-        <div>PoliArtGen</div>
+        <div class="logo-container">
+            <img src="src/img/poliedro-logo.png" alt="Logo Poliedro" class="logo-img-navbar">
+            <span>PoliArtGen</span>
+        </div>
         <ul class="nav-links">
             <li><a href="pag_principal.html"><i class="fas fa-home"></i> Gerador</a></li>
             <li><a href="historico_aluno.html" class="active"><i class="fas fa-history"></i> Histórico</a></li>
@@ -25,44 +28,45 @@
 
     <!-- CONTEÚDO PRINCIPAL -->
     <main class="container" id="main-container">
-    <article id="historico-article">
-        <header class="historico-header">
-            <h1 class="historico-title">Histórico de Ilustrações</h1>
-            <p class="historico-subtitle">Veja suas criações anteriores ou comece uma nova geração</p>
-        </header>
 
-        <!-- CONTAINER PRINCIPAL -->
-        <section class="historico-content" id="historico-content">
-            <!-- Caso não existam ilustrações -->
-            <div class="historico-box" id="historico-vazio">
-                <div class="historico-icon">
-                    <img src="src/img/icon_no_image.png" alt="Sem ilustrações">
+        <article id="historico-article">
+            <header class="historico-header">
+                <h1 class="historico-title">Histórico de Ilustrações</h1>
+                <p class="historico-subtitle">Veja suas criações anteriores ou comece uma nova geração</p>
+            </header>
+
+            <!-- CONTAINER PRINCIPAL -->
+            <section class="historico-content" id="historico-content">
+                <!-- Caso não existam ilustrações -->
+                <div class="historico-box" id="historico-vazio">
+                    <div class="historico-icon">
+                        <img src="src/img/icon_no_image.png" alt="Sem ilustrações">
+                    </div>
+                    <p class="historico-info">Nenhuma ilustração ainda</p>
+                    <p class="historico-instrucao">Comece criando sua primeira ilustração no gerador</p>
+                    <a href="pag_principal.html" class="historico-btn">Ir para o Gerador</a>
                 </div>
-                <p class="historico-info">Nenhuma ilustração ainda</p>
-                <p class="historico-instrucao">Comece criando sua primeira ilustração no gerador</p>
-                <a href="pag_principal.html" class="historico-btn">Ir para o Gerador</a>
-            </div>
 
-            <!-- Caso existam ilustrações -->
-            <div class="historico-grid" id="historico-grid" style="display: none;">
-                <!-- Exemplo de card -->
-                <!-- Os cards reais serão preenchidos via JavaScript -->
-                <div class="historico-card">
-                    <img src="src/img/exemplo_1.png" alt="Geração 1">
-                    <div class="historico-card-info">
-                        <p class="historico-card-titulo">“Cenário Futurista”</p>
-                        <p class="historico-card-data">Gerado em: 02/10/2025</p>
+                <!-- Caso existam ilustrações -->
+                <div class="historico-grid" id="historico-grid" style="display: none;">
+                    <!-- Exemplo de card -->
+                    <!-- Os cards reais serão preenchidos via JavaScript -->
+                    <div class="historico-card">
+                        <img src="src/img/exemplo_1.png" alt="Geração 1">
+                        <div class="historico-card-info">
+                            <p class="historico-card-titulo">“Cenário Futurista”</p>
+                            <p class="historico-card-data">Gerado em: 02/10/2025</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- BOTÃO FINAL -->
-        <div class="historico-btn-container">
-            <a href="pag_principal.html" class="historico-btn">Ir para o Gerador</a>
-        </div>
-    </article>
-</main>
+            <!-- BOTÃO FINAL -->
+            <div class="historico-btn-container">
+                <a href="pag_principal.html" class="historico-btn">Ir para o Gerador</a>
+            </div>
+        </article>
+    </main>
 
 
     <footer id="historico-footer">
@@ -72,4 +76,5 @@
     <script src="src/js/historico.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
