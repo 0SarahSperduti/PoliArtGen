@@ -80,3 +80,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
+// colocar da pafgina de cadrastro para login
+// conectar login com bd e parte de cadrastro tmb 
