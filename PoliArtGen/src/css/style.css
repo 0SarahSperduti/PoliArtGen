@@ -316,6 +316,7 @@
   font-weight: 600;
   flex-wrap: wrap;
   gap: 10px;
+  
 }
 
 .nav-links {
@@ -324,6 +325,7 @@
   gap: 1rem;
   margin: 0;
   padding: 0;
+  align-items: center;
 }
 
 .nav-links li {
@@ -637,6 +639,9 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   font-weight: 600;
   flex-wrap: wrap;
+  height: 70px; /* altura fixa da navbar, para ela não aumentar igual estva fazendo*/
+  position: relative; /* pra posicionar o logo de forma independente */
+  overflow: visible; /* deixa o logo “vazar” se ultrapassar a navbar */
 }
 
 .navbar div {
@@ -650,6 +655,9 @@
   gap: 2rem;
   margin: 0;
   padding: 0;
+  align-items: flex-start;
+  height: 50px;
+  margin-top: -70px;
 }
 
 .nav-links li a {
@@ -1186,14 +1194,18 @@
 
 .logo-container {
   display: flex;
-  align-items: center;
+  align-items: flex-start; /* estava center*/
   gap: 0.5rem;
+  position: relative;
+  
 }
 
 .logo-img-navbar {
-  height: 40px;
+  height: 200px;
   width: auto;
   object-fit: contain;
+  margin-top: -70px; 
+  position: relative;
 }
 
 .logo-text {
