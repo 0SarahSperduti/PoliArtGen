@@ -570,7 +570,16 @@
   font-size: 1rem;
   background: #fafafa;
 }
+#mascote-resultado {
+  width: 100%;
+  max-width: 120px; 
+  margin-bottom: 1.5rem;
 
+}
+#mascote-resultado img {
+  width: 100%; /* Faz a imagem ocupar todo o espaço da div do mascote */
+  height: auto;
+}
 /* Responsividade da área de resultado */
 @media (max-width: 576px) {
   .preview {
