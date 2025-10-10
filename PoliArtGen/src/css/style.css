@@ -40,8 +40,8 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  justify-content: flex-start;
   text-align: center;
+  justify-content: center;
 }
 
 .logo-inline {
@@ -704,6 +704,8 @@
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   background: transparent;
   /* ou branco, se necessário */
+  display: flex; 
+  justify-content: center;
 }
 
 
