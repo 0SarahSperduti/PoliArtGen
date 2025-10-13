@@ -66,6 +66,22 @@
 }
 
 
+/* checkbox lembrar de mim arrumado */
+.lembrar-grupo {
+  display: flex;               
+  flex-direction: row-reverse; 
+  align-items: center;         
+  justify-content: flex-start; 
+  gap: 0.5rem;                 
+  cursor: pointer;             
+}
+
+.lembrar-grupo label {
+  white-space: nowrap; 
+  margin: 0;           
+}
+
+
 /* TELA DE CADASTRO RESPONSIVA */
 .login-container form {
   display: flex;
