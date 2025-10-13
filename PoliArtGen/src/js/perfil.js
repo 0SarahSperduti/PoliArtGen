@@ -80,6 +80,86 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+document.addEventListener('DOMContentLoaded', () => {
+
+    // --- Seleciona os elementos do modal e dos gatilhos ---
+    const modal = document.getElementById('sucesso-modal');
+    const modalTitulo = document.getElementById('modal-sucesso-titulo');
+    const modalMensagem = document.getElementById('modal-sucesso-mensagem');
+
+    const formDados = document.getElementById('form-dados');
+    const formSenha = document.getElementById('form-senha');
+    const btnExcluirConta = document.getElementById('btn-excluir-conta');
+    const btnAlterarAvatar = document.getElementById('btn-alterar-avatar');
+
+    function mostrarModalSucesso(titulo, mensagem) {
+        modalTitulo.textContent = titulo;
+        modalMensagem.textContent = mensagem;
+        modal.classList.add('visible');
+        
+        // O temporizador foi REMOVIDO. O modal não fechará sozinho.
+    }
+    // ... (resto do seu código do perfil.js) ...
+
+// Adiciona um evento para fechar o modal ao clicar no fundo escuro
+modal.addEventListener('click', (event) => {
+    if (event.target === modal) {
+        fecharModalSucesso();
+    }
+});
+
+    function fecharModalSucesso() {
+        modal.classList.remove('visible');
+    }
+
+    // --- Adiciona os eventos de clique ---
+
+    // 1. Salvar Alterações (dados do perfil)
+    if (formDados) {
+        formDados.addEventListener('submit', (event) => {
+            event.preventDefault(); 
+            console.log('Simulando salvamento de dados...');
+            
+            // MENSAGEM ESPECÍFICA AQUI
+            mostrarModalSucesso('Sucesso!', 'Suas alterações foram salvas com sucesso!');
+        });
+    }
+
+    // 2. Atualizar Senha
+    if (formSenha) {
+        formSenha.addEventListener('submit', (event) => {
+            event.preventDefault();
+            console.log('Simulando atualização de senha...');
+            
+            // MENSAGEM ESPECÍFICA AQUI
+            mostrarModalSucesso('Sucesso!', 'Sua senha foi atualizada com sucesso!');
+        });
+    }
+
+    // 3. Excluir Conta
+    if (btnExcluirConta) {
+        btnExcluirConta.addEventListener('click', () => {
+            const confirmado = confirm('Esta ação é irreversível. Você tem certeza que deseja excluir sua conta?');
+            
+            if (confirmado) {
+                console.log('Simulando exclusão da conta...');
+                
+                // MENSAGEM ESPECÍFICA AQUI
+                mostrarModalSucesso('Conta Excluída', 'Sua conta foi excluída com sucesso!');
+            }
+        });
+    }
+    
+    // 4. Alterar Avatar
+    if (btnAlterarAvatar) {
+        btnAlterarAvatar.addEventListener('click', () => {
+            console.log('Simulando alteração de avatar...');
+            
+            // MENSAGEM ESPECÍFICA AQUI
+            mostrarModalSucesso('Sucesso!', 'Seu avatar foi alterado com sucesso!');
+        });
+    }
+});
 
 // colocar da pafgina de cadrastro para login
 // conectar login com bd e parte de cadrastro tmb 

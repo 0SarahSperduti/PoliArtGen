@@ -86,3 +86,88 @@ function gerarIlustracao(prompt, imagemGeradaURL) {
 
     console.log("✅ Ilustração salva no histórico:", ilustracao);
 }
+// GARANTA QUE SEU main.js TENHA EXATAMENTE ESTE CÓDIGO
+document.addEventListener('DOMContentLoaded', () => {
+
+    const formGerador = document.getElementById('formPrincipal');
+    const resultadoDiv = document.getElementById('preview-img');
+
+    // Função que será chamada APENAS quando o usuário clicar em "Confirmar".
+    function executarGeracao(dadosParaApi) {
+        resultadoDiv.innerHTML = '<p>Gerando sua ilustração, aguarde um momento...</p>';
+        const apiUrl = 'http://localhost:8080/gerar-imagem';
+
+        fetch(apiUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(dadosParaApi)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro na resposta do servidor: ' + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.imageUrl) {
+                // --- MUDANÇA ACONTECE AQUI ---
+                // Agora, além da imagem, adicionamos um parágrafo com a mensagem de sucesso.
+                resultadoDiv.innerHTML = `
+                    <img src="${data.imageUrl}" alt="Ilustração gerada">
+                    <p class="mensagem-sucesso">Sua imagem foi salva no histórico com sucesso!</p>
+                `;
+            } else {
+                resultadoDiv.innerHTML = '<p>Ocorreu um erro ao gerar a imagem.</p>';
+            }
+        })
+        .catch(error => {
+            console.error('Erro na chamada da API:', error);
+            resultadoDiv.innerHTML = '<p>Oops! Falha na comunicação com o servidor.</p>';
+        });
+    }
+
+    if (formGerador) {
+        formGerador.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const dados = {
+                materia: document.getElementById('materia').value,
+                estilo: document.getElementById('estilo').value,
+                topico: document.getElementById('topico').value,
+                nivel: document.getElementById('nivel').value,
+                detalhes: document.getElementById('detalhes').value
+            };
+
+            const confirmacaoHtml = `
+                <div class="confirmacao-geracao">
+                    <h4>Confirme sua Geração</h4>
+                    <p><strong>Matéria:</strong> ${dados.materia}</p>
+                    <p><strong>Estilo:</strong> ${dados.estilo}</p>
+                    <p><strong>Tópico:</strong> ${dados.topico || 'Nenhum'}</p>
+                    <p><strong>Nível:</strong> ${dados.nivel}</p>
+                    <p><strong>Detalhes:</strong> ${dados.detalhes || 'Nenhum'}</p>
+                    <div class="botoes-confirmacao">
+                        <button id="btn-confirmar-geracao" class="btn-confirmar">Confirmar e Gerar</button>
+                        <button id="btn-cancelar-geracao" class="btn-cancelar">Cancelar</button>
+                    </div>
+                </div>
+            `;
+
+            resultadoDiv.innerHTML = confirmacaoHtml;
+
+            const btnConfirmar = document.getElementById('btn-confirmar-geracao');
+            const btnCancelar = document.getElementById('btn-cancelar-geracao');
+
+            btnConfirmar.addEventListener('click', () => {
+                executarGeracao(dados);
+            });
+
+            btnCancelar.addEventListener('click', () => {
+                resultadoDiv.innerHTML = `
+                    <p>Sua ilustração aparecerá aqui</p>
+                    <small>Preencha o formulário e clique em "Gerar Ilustração"</small>
+                `;
+            });
+        });
+    }
+});
