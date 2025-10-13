@@ -1,26 +1,32 @@
 // Arquivo para "Schemas" MongoDB
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt'); 
 
 const userSchema = new mongoose.Schema({
     nome: {
         type: String,
+        required: true
+    },
+    password: {
+        type: String,
         required: true 
     },
-    email:{
+    email: {
         type: String,
         required: true,
-        unique: true
+        unique: true 
     },
-    userTipo:{
+    userTipo: {
         type: String,
         enum: ['aluno', 'professor', 'outro'],
         required: false
     },
-    dataCriacao:{
+    dataCriacao: {
         type: Date,
         default: Date.now
     }
-})
+});
+
 
 userSchema.pre('save', function (next) {
     const email = this.email.toLowerCase();
@@ -30,34 +36,55 @@ userSchema.pre('save', function (next) {
     } else if (email.endsWith('@p4ed.com')) {
         this.userTipo = 'aluno';
     } else {
-        this.userTipo = 'outro'; 
+        this.userTipo = 'outro';
     }
     next();
 });
 
-// Função para criação de novo usuário, que será chamada na aba de cadastro 
-// do site, após o usuário colocar suas informações
 
-userSchema.statics.createUserFromRegistration = async function(nome, email) {
-    const newUser = new this({ nome, email });
+userSchema.pre('save', async function (next) {
+    // Só criptografa a senha se ela foi modificada ou se for um novo usuário
+    if (!this.isModified('password')) {
+        return next();
+    }
 
     try {
-        // Tentativa de salvar o novo usuário
+        const salt = await bcrypt.genSalt(10);
+
+        // criptografa a senha
+        this.password = await bcrypt.hash(this.password, salt);
+        next();
+    } catch (error) {
+        next(error); // Passa o erro para o Mongoose
+    }
+});
+
+
+
+userSchema.statics.createUserFromRegistration = async function (nome, email, password) { 
+    const newUser = new this({ nome, email, password }); 
+
+    try {
+        // Tentativa de salvar o novo usuário (o hook de criptografia será ativado)
         const savedUser = await newUser.save();
-        
+
         console.log(`Novo usuário criado: ${savedUser.nome} (${savedUser.userTipo})`);
         return savedUser;
-        
+
     } catch (error) {
         // Trata o erro de e-mail duplicado
-        if (error.code === 11000) { 
+        if (error.code === 11000) {
             // Retorna um erro para o front-end exibir
             throw new Error("Este e-mail já está cadastrado. Tente fazer login.");
         }
-        
-        // Trata outros erros de validação 
+
         throw error;
     }
+};
+
+
+userSchema.methods.comparePassword = function (candidatePassword) {
+    return bcrypt.compare(candidatePassword, this.password);
 };
 
 module.exports = mongoose.model('User', userSchema);
