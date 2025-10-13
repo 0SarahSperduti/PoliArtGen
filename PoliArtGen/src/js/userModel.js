@@ -1,6 +1,6 @@
 // Arquivo para "Schemas" MongoDB
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt'); 
+const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
     nome: {
@@ -9,12 +9,12 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true 
+        required: true
     },
     email: {
         type: String,
         required: true,
-        unique: true 
+        unique: true
     },
     userTipo: {
         type: String,
@@ -61,8 +61,8 @@ userSchema.pre('save', async function (next) {
 
 
 
-userSchema.statics.createUserFromRegistration = async function (nome, email, password) { 
-    const newUser = new this({ nome, email, password }); 
+userSchema.statics.createUserFromRegistration = async function (nome, email, password) {
+    const newUser = new this({ nome, email, password });
 
     try {
         // Tentativa de salvar o novo usuário (o hook de criptografia será ativado)
@@ -87,4 +87,23 @@ userSchema.methods.comparePassword = function (candidatePassword) {
     return bcrypt.compare(candidatePassword, this.password);
 };
 
-module.exports = mongoose.model('User', userSchema);
+userSchema.statics.authenticate = async function (email, password) {
+
+    // 1. Busca o usuário pelo email
+    const user = await this.findOne({ email });
+
+    if (!user) {
+        return null; // Usuário não encontrado
+    }
+
+    // 2. Compara a senha usando o método de instância (comparePassword)
+    const isMatch = await user.comparePassword(password);
+
+    if (isMatch) {
+        return user; // Senha correta: retorna o objeto do usuário
+    } else {
+        return null; // Senha incorreta
+    } 
+};
+
+    module.exports = mongoose.model('User', userSchema);
