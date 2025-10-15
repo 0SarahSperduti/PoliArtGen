@@ -1,143 +1,47 @@
-// src/js/main.js
-// Lógica principal (captura do formulário, simula geração, salva no histórico e exibe o resultado)
+// Lógica principal para a tela de Gerador (pag_principal.html)
 
 document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById("formPrincipal");
-    const preview = document.getElementById("preview-img");
+    // Pega o ID do usuário logado do localStorage
+    const userId = localStorage.getItem('userId');
+
+    const formGerador = document.getElementById("formPrincipal");
+    const resultadoDiv = document.getElementById("preview-img");
     const logoutBtn = document.querySelector(".logout");
+    
+    // Define os IDs exatos dos campos de entrada
+    const inputMateria = document.getElementById("materia");
+    const inputEstilo = document.getElementById("estilo");
+    const inputTopico = document.getElementById("topico");
+    const inputNivel = document.getElementById("nivel");
+    const inputDetalhes = document.getElementById("detalhes");
 
-    // 🚨 Verificação de segurança (caso o HTML ainda não tenha carregado completamente)
-    if (!form || !preview) {
-        console.warn("Formulário principal ou área de preview não encontrados.");
-        return;
-    }
-
-    // Evento de envio do formulário
-    form.addEventListener("submit", (e) => {
-        e.preventDefault();
-
-        // Captura dos campos
-        const materia = document.getElementById("materia").value;
-        const estilo = document.getElementById("estilo").value;
-        const topico = document.getElementById("topico").value.trim();
-        const nivel = document.getElementById("nivel").value;
-        const detalhes = document.getElementById("detalhes").value.trim();
-
-        // Validação
-        if (!topico) {
-            alert("Por favor, insira um tópico específico!");
-            return;
-        }
-
-        // Mostra carregamento
-        preview.innerHTML = `
-            <p><strong>Gerando ilustração...</strong></p>
-            <div class="loading"></div>
-        `;
-
-        // Simula tempo de geração
-        setTimeout(() => {
-            // Gera URL simulada (placeholder)
-            const imagemGeradaURL = `https://via.placeholder.com/400x250.png?text=${encodeURIComponent(topico)}`;
-
-            // Mostra a imagem gerada
-            preview.innerHTML = `
-                <img src="${imagemGeradaURL}" alt="Ilustração gerada">
-                <p><strong>${materia}</strong> - ${estilo}</p>
-                <small>${nivel}</small>
-                <p>${detalhes || "Sem detalhes adicionais."}</p>
-            `;
-
-            // 💾 Salva no histórico localStorage
-            const prompt = `${materia} | ${estilo} | ${topico} | ${nivel} | ${detalhes}`;
-            gerarIlustracao(prompt, imagemGeradaURL);
-
-        }, 1500);
-    });
-
-    // Evento de logout
-    if (logoutBtn) {
-        logoutBtn.addEventListener("click", (e) => {
-            e.preventDefault();
-            const confirmar = confirm("Deseja realmente sair?");
-            if (confirmar) {
-                window.location.href = "pag_login.html";
-            }
-        });
-    }
-});
-
-// 🧠 Função global para salvar ilustração no histórico
-function gerarIlustracao(prompt, imagemGeradaURL) {
-    const ilustracao = {
-        prompt,
-        imagem: imagemGeradaURL,
-        data: new Date().toLocaleString()
-    };
-
-    // Busca o histórico atual
-    let historico = JSON.parse(localStorage.getItem("historicoIlustracoes")) || [];
-
-    // Adiciona nova imagem
-    historico.push(ilustracao);
-
-    // Atualiza localStorage
-    localStorage.setItem("historicoIlustracoes", JSON.stringify(historico));
-
-    console.log("✅ Ilustração salva no histórico:", ilustracao);
-}
-// GARANTA QUE SEU main.js TENHA EXATAMENTE ESTE CÓDIGO
-document.addEventListener('DOMContentLoaded', () => {
-
-    const formGerador = document.getElementById('formPrincipal');
-    const resultadoDiv = document.getElementById('preview-img');
-
-    // Função que será chamada APENAS quando o usuário clicar em "Confirmar".
-    function executarGeracao(dadosParaApi) {
-        resultadoDiv.innerHTML = '<p>Gerando sua ilustração, aguarde um momento...</p>';
-        const apiUrl = 'http://localhost:8080/gerar-imagem';
-
-        fetch(apiUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(dadosParaApi)
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Erro na resposta do servidor: ' + response.status);
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (data.imageUrl) {
-                // --- MUDANÇA ACONTECE AQUI ---
-                // Agora, além da imagem, adicionamos um parágrafo com a mensagem de sucesso.
-                resultadoDiv.innerHTML = `
-                    <img src="${data.imageUrl}" alt="Ilustração gerada">
-                    <p class="mensagem-sucesso">Sua imagem foi salva no histórico com sucesso!</p>
-                `;
-            } else {
-                resultadoDiv.innerHTML = '<p>Ocorreu um erro ao gerar a imagem.</p>';
-            }
-        })
-        .catch(error => {
-            console.error('Erro na chamada da API:', error);
-            resultadoDiv.innerHTML = '<p>Oops! Falha na comunicação com o servidor.</p>';
-        });
-    }
-
+    // Lógica para o formulário de geração
     if (formGerador) {
         formGerador.addEventListener('submit', function (event) {
             event.preventDefault();
 
-            const dados = {
-                materia: document.getElementById('materia').value,
-                estilo: document.getElementById('estilo').value,
-                topico: document.getElementById('topico').value,
-                nivel: document.getElementById('nivel').value,
-                detalhes: document.getElementById('detalhes').value
-            };
+            if (!userId) {
+                alert('Você precisa estar logado para gerar ilustrações.');
+                window.location.href = 'pag_login.html'; // Redireciona
+                return;
+            }
 
+            // Coleta os dados do formulário
+            const dados = {
+                materia: inputMateria.value,
+                estilo: inputEstilo.value,
+                topico: inputTopico.value.trim(),
+                nivel: inputNivel.value,
+                detalhes: inputDetalhes.value.trim()
+            };
+            
+            // Validação mínima
+            if (!dados.topico) {
+                alert("Por favor, insira um tópico específico!");
+                return;
+            }
+
+            // mostra a confirmação antes de enviar
             const confirmacaoHtml = `
                 <div class="confirmacao-geracao">
                     <h4>Confirme sua Geração</h4>
@@ -155,14 +59,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
             resultadoDiv.innerHTML = confirmacaoHtml;
 
-            const btnConfirmar = document.getElementById('btn-confirmar-geracao');
-            const btnCancelar = document.getElementById('btn-cancelar-geracao');
-
-            btnConfirmar.addEventListener('click', () => {
-                executarGeracao(dados);
+            // Anexar event listeners aos botões de confirmação/cancelamento
+            document.getElementById('btn-confirmar-geracao').addEventListener('click', () => {
+                // Chama a função principal de API com os dados coletados
+                executarGeracao(dados, resultadoDiv, userId);
             });
 
-            btnCancelar.addEventListener('click', () => {
+            document.getElementById('btn-cancelar-geracao').addEventListener('click', () => {
                 resultadoDiv.innerHTML = `
                     <p>Sua ilustração aparecerá aqui</p>
                     <small>Preencha o formulário e clique em "Gerar Ilustração"</small>
@@ -170,4 +73,80 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+    
+    
+
+    // Lógica de logout
+    if (logoutBtn) {
+        logoutBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            const confirmar = confirm("Deseja realmente sair?");
+            if (confirmar) {
+                localStorage.removeItem('userId'); // Limpa a sessão
+                localStorage.removeItem('userTipo'); 
+                window.location.href = "pag_login.html";
+            }
+        });
+    }
 });
+
+
+// Função de integração com o backend 
+
+// Função que executa o FETCH e salva no MongoDB
+function executarGeracao(dadosFormulario, container, userId) {
+    
+    container.innerHTML = '<p><strong>Gerando ilustração...</strong></p><div class="loading"></div>';
+    
+    // Prepara o pacote de dados para o nosso backend Node.js
+    const dadosParaBackend = {
+        userId: userId, 
+        materia: dadosFormulario.materia,
+        estilo: dadosFormulario.estilo,
+        topicoEspecifico: dadosFormulario.topico,
+        nivelEducacional: dadosFormulario.nivel,
+        detalhesAdicionais: dadosFormulario.detalhes
+    };
+    
+    // Faz a chamada para a rota que salva no MongoDB
+    fetch('/api/generate', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dadosParaBackend)
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json(); 
+        }
+        return response.json().then(error => { throw new Error(error.message || 'Erro de servidor.'); });
+    })
+    .then(data => {
+        // Renderiza o resultado
+        if (data.success) {
+            renderizarResultado(data.image, container); 
+            console.log("Ilustração salva no histórico e exibida.");
+        } else {
+            container.innerHTML = `<p class="text-danger">❌ Erro na geração: ${data.message}</p>`;
+        }
+    })
+    .catch(error => {
+        console.error('Erro de Comunicação/Servidor:', error);
+        container.innerHTML = `<p class="text-danger">Falha na comunicação: ${error.message}</p>`;
+    });
+}
+
+
+// Função para renderizar o resultado da geração
+function renderizarResultado(imagemGerada, container) {
+    const dataCriacao = new Date(imagemGerada.dataCriacao).toLocaleDateString('pt-BR');
+
+    container.innerHTML = `
+        <p class="mensagem-sucesso">✅ Imagem gerada e salva no histórico em ${dataCriacao}!</p>
+        <img src="${imagemGerada.urlDaImagem}" alt="Ilustração gerada">
+        <p><strong>Prompt Salvo:</strong> ${imagemGerada.promptUtilizado}</p>
+        <p><strong>Estilo:</strong> ${imagemGerada.estilo}</p>
+        <a href="${imagemGerada.urlDaImagem}" download="ilustracao_${imagemGerada._id}.png" class="btn btn-primary mt-2">Baixar Imagem</a>
+    `;
+}

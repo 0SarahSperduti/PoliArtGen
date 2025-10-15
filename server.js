@@ -125,3 +125,47 @@ app.get('/api/history/:userId', async (req, res) => {
         return res.status(500).json({ success: false, message: 'Erro ao buscar dados no servidor.' });
     }
 });
+
+// Rota para gerar uma nova imagem 
+app.post('/api/generate', async (req, res) => {
+    
+    // Obtém os dados do formulário (enviados pelo frontend)
+    const { userId, materia, estilo, topicoEspecifico, nivelEducacional, detalhesAdicionais } = req.body;
+
+    // 1. Validação essencial
+    if (!userId || !materia || !estilo) {
+        return res.status(400).json({ success: false, message: 'Dados de geração incompletos.' });
+    }
+
+    try {
+        // --- SIMULAÇÃO DA IA: Esta é a parte que a IA real faria ---
+        // Aqui, o código chamaria o serviço externo de IA.
+        // Simulamos a URL que a IA devolveria e o prompt final que será salvo.
+        const URL_IMAGEM_REAL_TESTE = 'https://cdn.pixabay.com/photo/2025/10/09/08/14/mushroom-9883036_640.jpg';
+        const promptFinal = `${topicoEspecifico} (${materia} / ${nivelEducacional}). Detalhes: ${detalhesAdicionais}`;
+
+        // Montar o objeto de dados para o Modelo
+        const imageData = {
+            urlDaImagem: URL_IMAGEM_REAL_TESTE,
+            promptUtilizado: promptFinal,
+            materia: materia,
+            estilo: estilo,
+            topicoEspecifico: topicoEspecifico,
+            nivelEducacional: nivelEducacional,
+        };
+
+        // 3. Salvar no Histórico (usando o método estático do ImageModel)
+        const savedImage = await Image.saveImage(userId, imageData);
+
+        // 4. Resposta de SUCESSO para o frontend (com a nova imagem)
+        return res.status(201).json({ 
+            success: true, 
+            message: 'Ilustração gerada e salva!',
+            image: savedImage // Devolve o objeto salvo (com o ID e a URL)
+        });
+
+    } catch (error) {
+        console.error('Erro na geração/salvamento da imagem:', error);
+        return res.status(500).json({ success: false, message: 'Erro ao processar a geração.' });
+    }
+});
