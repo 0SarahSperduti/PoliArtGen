@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const express = require('express');
 const bodyParser = require('body-parser'); 
 const connectDB = require('./PoliArtGen/src/js/db_connector'); 
@@ -5,6 +6,7 @@ const path = require('path');
 const User = require('./PoliArtGen/src/js/userModel');
 const FRONTEND_ROOT = path.join(__dirname, 'PoliArtGen');
 const SRC_ROOT = path.join(FRONTEND_ROOT, 'src');
+const Image = require('./PoliArtGen/src/js/imageModel');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -15,10 +17,10 @@ app.use(bodyParser.json());
 app.use(express.static(FRONTEND_ROOT));
 app.use('/src', express.static(SRC_ROOT));
 
-// CONECTA AO BANCO DE DADOS
+// conecta ao banco de dados 
 connectDB(); 
 
-// ROTA DE CADASTRO (POST /api/cadastro)
+// rota de cadastro (POST /api/cadastro)
 app.post('/api/cadastro', async (req, res) => {
     
     // Desestrutura os dados enviados pelo fetch() do frontend
@@ -54,12 +56,12 @@ app.post('/api/cadastro', async (req, res) => {
 });
 
 
-// 3. INICIA O SERVIDOR
+// INICIA O SERVIDOR
 app.listen(PORT, () => {
     console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
 
-// ROTA DE LOGIN (POST /api/login)
+// Rota de login (POST /api/login)
 app.post('/api/login', async (req, res) => {
     
     const { email, senha } = req.body;
@@ -74,7 +76,7 @@ app.post('/api/login', async (req, res) => {
         const user = await User.authenticate(email, senha);
 
         if (user) {
-            // SUCESSO! Usuário autenticado.
+            // Usuário autenticado.
             console.log(`Usuário logado com sucesso: ${user.email} (${user.userTipo})`);
             
             // Aqui, em uma aplicação real, você criaria uma SESSÃO ou um TOKEN JWT.
@@ -94,5 +96,32 @@ app.post('/api/login', async (req, res) => {
     } catch (error) {
         console.error('Erro no processo de login:', error);
         return res.status(500).json({ success: false, message: 'Erro interno do servidor. Tente novamente.' });
+    }
+});
+
+// rota para buscar o histórico de imagens (GET /api/history/:userId)
+app.get('/api/history/:userId', async (req, res) => {
+    
+    // Pega o ID do usuário da URL
+    const userId = req.params.userId;
+
+    // Verificação básica do ID
+    if (!userId || !mongoose.Types.ObjectId.isValid(userId)) {
+        return res.status(400).json({ success: false, message: 'ID de usuário inválido.' });
+    }
+
+    try {
+        // Chama o método estático para buscar todas as imagens
+        const history = await Image.getImageHistory(userId);
+
+        // Resposta de SUCESSO
+        return res.status(200).json({ 
+            success: true, 
+            history: history 
+        });
+
+    } catch (error) {
+        console.error('Erro ao buscar histórico:', error);
+        return res.status(500).json({ success: false, message: 'Erro ao buscar dados no servidor.' });
     }
 });
