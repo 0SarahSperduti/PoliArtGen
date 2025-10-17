@@ -1,6 +1,8 @@
+require('dotenv').config(); 
 const mongoose = require('mongoose');
 const express = require('express');
 const bodyParser = require('body-parser'); 
+const axios = require('axios');
 const connectDB = require('./PoliArtGen/src/js/db_connector'); 
 const path = require('path');
 const User = require('./PoliArtGen/src/js/userModel');
@@ -138,15 +140,48 @@ app.post('/api/generate', async (req, res) => {
     }
 
     try {
-        // --- SIMULAÇÃO DA IA: Esta é a parte que a IA real faria ---
-        // Aqui, o código chamaria o serviço externo de IA.
-        // Simulamos a URL que a IA devolveria e o prompt final que será salvo.
-        const URL_IMAGEM_REAL_TESTE = 'https://cdn.pixabay.com/photo/2025/10/09/08/14/mushroom-9883036_640.jpg';
-        const promptFinal = `${topicoEspecifico} (${materia} / ${nivelEducacional}). Detalhes: ${detalhesAdicionais}`;
+        // --- INÍCIO DA MODIFICAÇÃO: CHAMADA REAL À API ---
 
-        // Montar o objeto de dados para o Modelo
+        // 2. Montar o prompt final para a IA
+        const promptFinal = `${topicoEspecifico} no estilo de ${estilo}, para o nível ${nivelEducacional} sobre ${materia}. Detalhes: ${detalhesAdicionais}`;
+
+        // 3. Configurar a chamada para a API do ImagineArt
+        const imagineArtUrl = 'https://api.imagine.art/v1/generations'; // Verifique a URL na documentação oficial
+        const apiKey = process.env.IMAGINE_ART_API_KEY; // Pega a chave do arquivo .env
+
+        const headers = {
+            'Authorization': `Bearer ${apiKey}`,
+            'Content-Type': 'application/json'
+        };
+
+        const data = {
+            "prompt": promptFinal,
+            // Adicione outros parâmetros que a API do ImagineArt permite, como:
+            // "style": "IMAGINE_V5", 
+            // "aspect_ratio": "1:1",
+        };
+
+        // 4. Fazer a chamada à API usando axios
+        console.log("Enviando prompt para a API:", promptFinal);
+        const response = await axios.post(imagineArtUrl, data, { headers: headers });
+
+        // 5. Extrair a URL da imagem da resposta da API
+        // IMPORTANTE: O caminho para a URL pode ser diferente!
+        // Use console.log(response.data) para ver a estrutura completa e achar o caminho certo.
+        const imageUrl = response.data.data[0].url; 
+
+        if (!imageUrl) {
+            throw new Error("A API não retornou uma URL de imagem.");
+        }
+        
+        console.log("URL da imagem recebida:", imageUrl);
+        
+        // --- FIM DA MODIFICAÇÃO ---
+
+
+        // 6. Montar o objeto de dados para salvar no seu Banco de Dados
         const imageData = {
-            urlDaImagem: URL_IMAGEM_REAL_TESTE,
+            urlDaImagem: imageUrl, // <-- Usa a URL REAL recebida da API
             promptUtilizado: promptFinal,
             materia: materia,
             estilo: estilo,
@@ -154,10 +189,10 @@ app.post('/api/generate', async (req, res) => {
             nivelEducacional: nivelEducacional,
         };
 
-        // 3. Salvar no Histórico (usando o método estático do ImageModel)
+        // 7. Salvar no Histórico (usando o método estático do ImageModel)
         const savedImage = await Image.saveImage(userId, imageData);
 
-        // 4. Resposta de SUCESSO para o frontend (com a nova imagem)
+        // 8. Resposta de SUCESSO para o frontend (com a nova imagem)
         return res.status(201).json({ 
             success: true, 
             message: 'Ilustração gerada e salva!',
@@ -165,7 +200,11 @@ app.post('/api/generate', async (req, res) => {
         });
 
     } catch (error) {
-        console.error('Erro na geração/salvamento da imagem:', error);
-        return res.status(500).json({ success: false, message: 'Erro ao processar a geração.' });
+        // Trata erros da chamada à API ou do salvamento no banco
+        console.error('Erro na geração/salvamento da imagem:', error.response ? error.response.data : error.message);
+        return res.status(500).json({ 
+            success: false, 
+            message: 'Erro ao processar a geração. Verifique o console do servidor.' 
+        });
     }
 });
