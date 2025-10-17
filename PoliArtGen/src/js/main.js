@@ -144,9 +144,110 @@ function renderizarResultado(imagemGerada, container) {
 
     container.innerHTML = `
         <p class="mensagem-sucesso">✅ Imagem gerada e salva no histórico em ${dataCriacao}!</p>
-        <img src="${imagemGerada.urlDaImagem}" alt="Ilustração gerada">
+        <img src="${imagemGerada.urlDaImagem}" alt="Ilustração gerada" id="imagem-resultado" crossorigin="anonymous">
         <p><strong>Prompt Salvo:</strong> ${imagemGerada.promptUtilizado}</p>
         <p><strong>Estilo:</strong> ${imagemGerada.estilo}</p>
-        <a href="${imagemGerada.urlDaImagem}" download="ilustracao_${imagemGerada._id}.png" class="btn btn-primary mt-2">Baixar Imagem</a>
+        <div class="download-buttons">
+            <button onclick="baixarImagem('${imagemGerada.urlDaImagem}', 'ilustracao_${imagemGerada._id}.png', 'png')" class="btn btn-primary mt-2">
+                📥 Baixar PNG
+            </button>
+            <button onclick="baixarImagem('${imagemGerada.urlDaImagem}', 'ilustracao_${imagemGerada._id}.jpg', 'jpeg')" class="btn btn-secondary mt-2">
+                📥 Baixar JPEG
+            </button>
+        </div>
     `;
+}
+
+/**
+ * Função para baixar a imagem em PNG ou JPEG
+ * @param {string} imageUrl - URL da imagem
+ * @param {string} filename - Nome do arquivo para download
+ * @param {string} format - Formato: 'png' ou 'jpeg'
+ */
+function baixarImagem(imageUrl, filename, format) {
+    // Mostra feedback visual
+    const originalText = event.target.textContent;
+    event.target.textContent = '⏳ Processando...';
+    event.target.disabled = true;
+
+    // Cria um canvas para converter a imagem
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    const img = new Image();
+    
+    // Importante: permite carregar imagens de outros domínios
+    img.crossOrigin = 'anonymous';
+    
+    img.onload = function() {
+        // Define o tamanho do canvas igual à imagem
+        canvas.width = img.width;
+        canvas.height = img.height;
+        
+        // Se for JPEG, preenche o fundo com branco (JPEG não suporta transparência)
+        if (format === 'jpeg') {
+            ctx.fillStyle = '#FFFFFF';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+        
+        // Desenha a imagem no canvas
+        ctx.drawImage(img, 0, 0);
+        
+        // Converte para o formato desejado
+        const mimeType = format === 'png' ? 'image/png' : 'image/jpeg';
+        const quality = format === 'jpeg' ? 0.95 : undefined; // Qualidade para JPEG
+        
+        canvas.toBlob(function(blob) {
+            // Cria um link temporário para download
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = filename;
+            
+            // Simula o clique no link
+            document.body.appendChild(link);
+            link.click();
+            
+            // Limpa
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(url);
+            
+            // Restaura o botão
+            event.target.textContent = originalText;
+            event.target.disabled = false;
+            
+            // Feedback de sucesso
+            alert(`✅ Imagem baixada com sucesso como ${format.toUpperCase()}!`);
+        }, mimeType, quality);
+    };
+    
+    img.onerror = function() {
+        // Se falhar ao carregar (CORS ou outro erro), tenta download direto
+        console.warn('Não foi possível converter a imagem. Tentando download direto...');
+        
+        fetch(imageUrl)
+            .then(response => response.blob())
+            .then(blob => {
+                const url = window.URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = filename;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                window.URL.revokeObjectURL(url);
+                
+                event.target.textContent = originalText;
+                event.target.disabled = false;
+                alert(`✅ Imagem baixada com sucesso!`);
+            })
+            .catch(error => {
+                console.error('Erro no download:', error);
+                alert('❌ Erro ao baixar a imagem. Tente novamente.');
+                event.target.textContent = originalText;
+                event.target.disabled = false;
+            });
+    };
+    
+    // Inicia o carregamento da imagem
+    img.src = imageUrl;
 }
