@@ -169,3 +169,71 @@ app.post('/api/generate', async (req, res) => {
         return res.status(500).json({ success: false, message: 'Erro ao processar a geração.' });
     }
 });
+
+// Rota para buscar os dados do perfil do usuário 
+app.get('/api/profile/:userId', async (req, res) => {
+    
+    const userId = req.params.userId;
+
+    if (!userId || !mongoose.Types.ObjectId.isValid(userId)) {
+        return res.status(400).json({ success: false, message: 'ID de usuário inválido.' });
+    }
+
+    try {
+        // Chama o método estático do UserModel para buscar o usuário (sem a senha)
+        const user = await User.findById(userId); 
+
+        if (user) {
+            // SUCESSO: Retorna o objeto do usuário (sem a senha)
+            return res.status(200).json({ 
+                success: true, 
+                user: user
+            });
+        } else {
+            return res.status(404).json({ success: false, message: 'Usuário não encontrado.' });
+        }
+
+    } catch (error) {
+        console.error('Erro ao buscar perfil:', error);
+        return res.status(500).json({ success: false, message: 'Erro interno ao buscar perfil.' });
+    }
+});
+
+// Rota para atualizar os dados do perfil do usuário
+app.post('/api/profile/update', async (req, res) => {
+    const { userId, nome, email } = req.body;
+
+    if (!userId || !nome || !email) {
+        return res.status(400).json({ success: false, message: 'Dados incompletos.' });
+    }
+    
+    try {
+        // Chama o método estático do UserModel para atualizar
+        const updatedUser = await User.updateProfileData(userId, nome, email);
+        return res.status(200).json({ success: true, message: 'Dados atualizados com sucesso!', user: updatedUser });
+
+    } catch (error) {
+        console.error('Erro ao atualizar perfil:', error);
+        // Trata erro de e-mail duplicado ou validação
+        return res.status(500).json({ success: false, message: error.message || 'Falha ao atualizar dados.' });
+    }
+});
+
+// Rota para atualizar a senha do usuário
+app.post('/api/password/update', async (req, res) => {
+    const { userId, senhaAtual, novaSenha } = req.body;
+
+    if (!userId || !senhaAtual || !novaSenha) {
+        return res.status(400).json({ success: false, message: 'Todos os campos de senha são obrigatórios.' });
+    }
+
+    try {
+        // Chama o método estático do UserModel para verificar a senha e salvar a nova
+        await User.updatePassword(userId, senhaAtual, novaSenha);
+        return res.status(200).json({ success: true, message: 'Senha alterada com sucesso!' });
+    } catch (error) {
+        console.error('Erro ao alterar senha:', error);
+        // Retorna 401 (Não Autorizado) se a senha atual estiver incorreta
+        return res.status(401).json({ success: false, message: error.message || 'Senha atual incorreta ou falha de servidor.' });
+    }
+});

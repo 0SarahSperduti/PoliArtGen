@@ -103,7 +103,55 @@ userSchema.statics.authenticate = async function (email, password) {
         return user; // Senha correta: retorna o objeto do usuário
     } else {
         return null; // Senha incorreta
-    } 
+    }
 };
 
-    module.exports = mongoose.model('User', userSchema);
+
+// 1. Atualiza o nome e o e-mail de um usuário.
+
+userSchema.statics.updateProfileData = async function (userId, nome, email) {
+    try {
+        // Encontra o usuário pelo ID e atualiza os campos. 
+        // { new: true } retorna o documento ATUALIZADO.
+        const updatedUser = await this.findByIdAndUpdate(
+            userId,
+            { nome, email },
+            { new: true, runValidators: true } // runValidators: Garante que o Mongoose cheque se o novo e-mail já existe (unique).
+        ).select('-password'); // Exclui a senha do retorno
+
+        if (!updatedUser) {
+            throw new Error("Usuário não encontrado.");
+        }
+        return updatedUser;
+    } catch (error) {
+        if (error.code === 11000) { // Erro de e-mail duplicado
+            throw new Error("Este e-mail já está em uso por outro usuário.");
+        }
+        throw error;
+    }
+};
+
+// Atualiza a senha de um usuário, verificando a senha atual primeiro.
+
+userSchema.statics.updatePassword = async function (userId, senhaAtual, novaSenha) {
+    const user = await this.findById(userId);
+
+    if (!user) {
+        throw new Error("Usuário não encontrado.");
+    }
+
+    // Verifica a senha atual usando a lógica bcrypt
+    const isMatch = await user.comparePassword(senhaAtual);
+    if (!isMatch) {
+        throw new Error("Senha atual incorreta.");
+    }
+
+    // Atualiza o campo 'password'. O hook 'pre('save')' do bcrypt fará a criptografia.
+    user.password = novaSenha;
+
+    // Salva o documento (o save irá ativar o hook de bcrypt)
+    await user.save();
+    return true; // Sucesso
+};
+
+module.exports = mongoose.model('User', userSchema);

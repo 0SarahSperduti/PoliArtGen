@@ -251,3 +251,37 @@ function baixarImagem(imageUrl, filename, format) {
     // Inicia o carregamento da imagem
     img.src = imageUrl;
 }
+
+app.post('/api/profile/update', async (req, res) => {
+    const { userId, nome, email } = req.body;
+
+    if (!userId || !nome || !email) {
+        return res.status(400).json({ success: false, message: 'Dados incompletos.' });
+    }
+    
+    try {
+        const updatedUser = await User.updateProfileData(userId, nome, email);
+        return res.status(200).json({ success: true, message: 'Dados atualizados com sucesso!', user: updatedUser });
+
+    } catch (error) {
+        console.error('Erro ao atualizar perfil:', error);
+        return res.status(500).json({ success: false, message: error.message || 'Falha ao atualizar dados.' });
+    }
+});
+
+app.post('/api/password/update', async (req, res) => {
+    const { userId, senhaAtual, novaSenha } = req.body;
+
+    if (!userId || !senhaAtual || !novaSenha) {
+        return res.status(400).json({ success: false, message: 'Todos os campos de senha são obrigatórios.' });
+    }
+
+    try {
+        await User.updatePassword(userId, senhaAtual, novaSenha);
+        return res.status(200).json({ success: true, message: 'Senha alterada com sucesso!' });
+    } catch (error) {
+        console.error('Erro ao alterar senha:', error);
+        // Retorna 401 (Não Autorizado) se a senha atual estiver incorreta
+        return res.status(401).json({ success: false, message: error.message || 'Falha ao alterar senha.' });
+    }
+});
