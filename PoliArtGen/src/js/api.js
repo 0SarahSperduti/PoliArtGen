@@ -1,42 +1,27 @@
-// funcoes para integrar com a api de ia
+import fs from "node:fs";
+import axios from "axios";
+import FormData from "form-data";
 
-// Exemplo de chamada GET
-fetch("google/gemini-2.5-flash-image-preview")
-    .then(response => {
-        if (!response.ok) {
-            throw new Error("Erro na requisição: " + response.status);
-        }
-        return response.json(); // converte para JSON
-    })
-    .then(data => {
-        console.log("Usuários recebidos:", data);
-        // aqui você pode manipular o resultado, exibir na tela etc.
-    })
-    .catch(error => {
-        console.error("Erro ao conectar na API:", error);
-    });
-document.getElementById("loginForm").addEventListener("submit", function (e) {
-    e.preventDefault();
+const payload = {
+  prompt: "Lighthouse on a cliff overlooking the ocean",
+  output_format: "webp"
+};
 
-    const usuario = document.getElementById("usuario").value;
-    const senha = document.getElementById("senha").value;
+const response = await axios.postForm(
+  `https://api.stability.ai/v2beta/stable-image/generate/ultra`,
+  axios.toFormData(payload, new FormData()),
+  {
+    validateStatus: undefined,
+    responseType: "arraybuffer",
+    headers: { 
+      Authorization: `Bearer sk-MYAPIKEY`, 
+      Accept: "image/*" 
+    },
+  },
+);
 
-    fetch("google/gemini-2.5-flash-image-preview", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ usuario, senha })
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.sucesso) {
-                window.location.href = "pag_principal.html";
-            } else {
-                alert("Usuário ou senha inválidos!");
-            }
-        })
-        .catch(error => {
-            console.error("Erro na requisição:", error);
-        });
-});
+if(response.status === 200) {
+  fs.writeFileSync("./lighthouse.webp", Buffer.from(response.data));
+} else {
+  throw new Error(`${response.status}: ${response.data.toString()}`);
+}
