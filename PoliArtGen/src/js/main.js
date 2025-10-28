@@ -1,4 +1,4 @@
-// Lógica principal para a tela de Gerador (pag_principal.html)
+// main.js - Lógica principal para a tela de Gerador (pag_principal.html)
 
 document.addEventListener("DOMContentLoaded", () => {
     // Pega o ID do usuário logado do localStorage
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            // Coleta os dados do formulário
+            // Coleta TODOS os dados do formulário
             const dados = {
                 materia: inputMateria.value,
                 estilo: inputEstilo.value,
@@ -41,18 +41,29 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            // mostra a confirmação antes de enviar
+            // Log para debug - mostra o que será enviado
+            console.log('📤 Dados capturados do formulário:');
+            console.log({
+                userId,
+                materia: dados.materia,
+                estilo: dados.estilo,
+                topicoEspecifico: dados.topico,
+                nivelEducacional: dados.nivel,
+                detalhesAdicionais: dados.detalhes || '(nenhum)'
+            });
+
+            // Mostra a confirmação antes de enviar
             const confirmacaoHtml = `
                 <div class="confirmacao-geracao">
                     <h4>Confirme sua Geração</h4>
                     <p><strong>Matéria:</strong> ${dados.materia}</p>
                     <p><strong>Estilo:</strong> ${dados.estilo}</p>
-                    <p><strong>Tópico:</strong> ${dados.topico || 'Nenhum'}</p>
+                    <p><strong>Tópico:</strong> ${dados.topico}</p>
                     <p><strong>Nível:</strong> ${dados.nivel}</p>
                     <p><strong>Detalhes:</strong> ${dados.detalhes || 'Nenhum'}</p>
                     <div class="botoes-confirmacao">
-                        <button id="btn-confirmar-geracao" class="btn-confirmar">Confirmar e Gerar</button>
-                        <button id="btn-cancelar-geracao" class="btn-cancelar">Cancelar</button>
+                        <button id="btn-confirmar-geracao" class="btn-confirmar">✅ Confirmar e Gerar</button>
+                        <button id="btn-cancelar-geracao" class="btn-cancelar">❌ Cancelar</button>
                     </div>
                 </div>
             `;
@@ -74,7 +85,24 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
     
-    
+    // Adiciona preview dos dados enquanto o usuário digita
+    if (inputTopico) {
+        inputTopico.addEventListener('input', (e) => {
+            const topico = e.target.value;
+            if (topico.length > 3) {
+                console.log('💡 Tópico digitado:', topico);
+            }
+        });
+    }
+
+    if (inputDetalhes) {
+        inputDetalhes.addEventListener('input', (e) => {
+            const detalhes = e.target.value;
+            if (detalhes.length > 10) {
+                console.log('📝 Detalhes adicionados:', detalhes);
+            }
+        });
+    }
 
     // Lógica de logout
     if (logoutBtn) {
@@ -91,14 +119,26 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-// Função de integração com o backend 
+// ===== FUNÇÃO DE INTEGRAÇÃO COM O BACKEND =====
 
-// Função que executa o FETCH e salva no MongoDB
+/**
+ * Função que executa o FETCH e salva no MongoDB
+ * Envia TODOS os campos do formulário para a IA processar
+ */
 function executarGeracao(dadosFormulario, container, userId) {
     
-    container.innerHTML = '<p><strong>Gerando ilustração...</strong></p><div class="loading"></div>';
+    container.innerHTML = `
+        <div style="text-align: center; padding: 20px;">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Carregando...</span>
+            </div>
+            <p style="margin-top: 15px;"><strong>🎨 Gerando ilustração...</strong></p>
+            <small>A IA está processando seu pedido. Isso pode levar até 2 minutos.</small>
+        </div>
+    `;
     
     // Prepara o pacote de dados para o nosso backend Node.js
+    // IMPORTANTE: Envia todos os campos para a IA entender o contexto completo
     const dadosParaBackend = {
         userId: userId, 
         materia: dadosFormulario.materia,
@@ -107,6 +147,8 @@ function executarGeracao(dadosFormulario, container, userId) {
         nivelEducacional: dadosFormulario.nivel,
         detalhesAdicionais: dadosFormulario.detalhes
     };
+    
+    console.log('🚀 Enviando para a API:', dadosParaBackend);
     
     // Faz a chamada para a rota que salva no MongoDB
     fetch('/api/generate', {
@@ -120,43 +162,84 @@ function executarGeracao(dadosFormulario, container, userId) {
         if (response.ok) {
             return response.json(); 
         }
-        return response.json().then(error => { throw new Error(error.message || 'Erro de servidor.'); });
+        return response.json().then(error => { 
+            throw new Error(error.message || 'Erro de servidor.'); 
+        });
     })
     .then(data => {
         // Renderiza o resultado
         if (data.success) {
+            console.log('✅ Sucesso! Dados recebidos:', data);
             renderizarResultado(data.image, container); 
             console.log("Ilustração salva no histórico e exibida.");
         } else {
-            container.innerHTML = `<p class="text-danger">❌ Erro na geração: ${data.message}</p>`;
+            container.innerHTML = `
+                <div style="text-align: center; padding: 20px; color: #dc3545;">
+                    <p style="font-size: 48px;">⚠️</p>
+                    <p><strong>Erro na geração</strong></p>
+                    <small>${data.message}</small>
+                </div>
+            `;
         }
     })
     .catch(error => {
-        console.error('Erro de Comunicação/Servidor:', error);
-        container.innerHTML = `<p class="text-danger">Falha na comunicação: ${error.message}</p>`;
+        console.error('❌ Erro de Comunicação/Servidor:', error);
+        container.innerHTML = `
+            <div style="text-align: center; padding: 20px; color: #dc3545;">
+                <p style="font-size: 48px;">⚠️</p>
+                <p><strong>Falha na comunicação</strong></p>
+                <small>${error.message}</small>
+                <br><br>
+                <button onclick="location.reload()" class="btn btn-warning btn-sm">
+                    🔄 Tentar Novamente
+                </button>
+            </div>
+        `;
     });
 }
 
 
-// Função para renderizar o resultado da geração
+/**
+ * Função para renderizar o resultado da geração
+ * Exibe a imagem e informações sobre o prompt usado
+ */
 function renderizarResultado(imagemGerada, container) {
     const dataCriacao = new Date(imagemGerada.dataCriacao).toLocaleDateString('pt-BR');
 
     container.innerHTML = `
-        <p class="mensagem-sucesso">✅ Imagem gerada e salva no histórico em ${dataCriacao}!</p>
-        <img src="${imagemGerada.urlDaImagem}" alt="Ilustração gerada" id="imagem-resultado" crossorigin="anonymous">
-        <p><strong>Prompt Salvo:</strong> ${imagemGerada.promptUtilizado}</p>
-        <p><strong>Estilo:</strong> ${imagemGerada.estilo}</p>
-        <div class="download-buttons">
-            <button onclick="baixarImagem('${imagemGerada.urlDaImagem}', 'ilustracao_${imagemGerada._id}.png', 'png')" class="btn btn-primary mt-2">
-                📥 Baixar PNG
-            </button>
-            <button onclick="baixarImagem('${imagemGerada.urlDaImagem}', 'ilustracao_${imagemGerada._id}.jpg', 'jpeg')" class="btn btn-secondary mt-2">
-                📥 Baixar JPEG
-            </button>
+        <div style="text-align: center;">
+            <p class="mensagem-sucesso" style="color: #28a745; font-weight: bold; margin-bottom: 15px;">
+                ✅ Imagem gerada e salva no histórico em ${dataCriacao}!
+            </p>
+            <img src="${imagemGerada.urlDaImagem}" 
+                 alt="Ilustração gerada" 
+                 id="imagem-resultado" 
+                 crossorigin="anonymous"
+                 style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); margin-bottom: 15px;">
+            
+            <div style="text-align: left; padding: 15px; background: #f8f9fa; border-radius: 8px; margin-bottom: 15px;">
+                <p style="margin: 5px 0;"><strong>📝 Prompt usado pela IA:</strong></p>
+                <small style="color: #666; word-wrap: break-word;">${imagemGerada.promptUtilizado}</small>
+                <p style="margin: 10px 0 5px 0;"><strong>🎨 Estilo:</strong> ${imagemGerada.estilo}</p>
+                <p style="margin: 5px 0;"><strong>📚 Matéria:</strong> ${imagemGerada.materia}</p>
+                <p style="margin: 5px 0;"><strong>🎯 Tópico:</strong> ${imagemGerada.topicoEspecifico}</p>
+                <p style="margin: 5px 0;"><strong>🎓 Nível:</strong> ${imagemGerada.nivelEducacional}</p>
+            </div>
+            
+            <div class="download-buttons" style="display: flex; gap: 10px; justify-content: center;">
+                <button onclick="baixarImagem('${imagemGerada.urlDaImagem}', 'ilustracao_${imagemGerada._id}.png', 'png')" 
+                        class="btn btn-primary">
+                    📥 Baixar PNG
+                </button>
+                <button onclick="baixarImagem('${imagemGerada.urlDaImagem}', 'ilustracao_${imagemGerada._id}.jpg', 'jpeg')" 
+                        class="btn btn-secondary">
+                    📥 Baixar JPEG
+                </button>
+            </div>
         </div>
     `;
 }
+
 
 /**
  * Função para baixar a imagem em PNG ou JPEG
@@ -166,9 +249,10 @@ function renderizarResultado(imagemGerada, container) {
  */
 function baixarImagem(imageUrl, filename, format) {
     // Mostra feedback visual
-    const originalText = event.target.textContent;
-    event.target.textContent = '⏳ Processando...';
-    event.target.disabled = true;
+    const btn = event.target;
+    const originalText = btn.textContent;
+    btn.textContent = '⏳ Processando...';
+    btn.disabled = true;
 
     // Cria um canvas para converter a imagem
     const canvas = document.createElement('canvas');
@@ -212,8 +296,8 @@ function baixarImagem(imageUrl, filename, format) {
             window.URL.revokeObjectURL(url);
             
             // Restaura o botão
-            event.target.textContent = originalText;
-            event.target.disabled = false;
+            btn.textContent = originalText;
+            btn.disabled = false;
             
             // Feedback de sucesso
             alert(`✅ Imagem baixada com sucesso como ${format.toUpperCase()}!`);
@@ -236,52 +320,18 @@ function baixarImagem(imageUrl, filename, format) {
                 document.body.removeChild(link);
                 window.URL.revokeObjectURL(url);
                 
-                event.target.textContent = originalText;
-                event.target.disabled = false;
+                btn.textContent = originalText;
+                btn.disabled = false;
                 alert(`✅ Imagem baixada com sucesso!`);
             })
             .catch(error => {
                 console.error('Erro no download:', error);
                 alert('❌ Erro ao baixar a imagem. Tente novamente.');
-                event.target.textContent = originalText;
-                event.target.disabled = false;
+                btn.textContent = originalText;
+                btn.disabled = false;
             });
     };
     
     // Inicia o carregamento da imagem
     img.src = imageUrl;
 }
-
-app.post('/api/profile/update', async (req, res) => {
-    const { userId, nome, email } = req.body;
-
-    if (!userId || !nome || !email) {
-        return res.status(400).json({ success: false, message: 'Dados incompletos.' });
-    }
-    
-    try {
-        const updatedUser = await User.updateProfileData(userId, nome, email);
-        return res.status(200).json({ success: true, message: 'Dados atualizados com sucesso!', user: updatedUser });
-
-    } catch (error) {
-        console.error('Erro ao atualizar perfil:', error);
-        return res.status(500).json({ success: false, message: error.message || 'Falha ao atualizar dados.' });
-    }
-});
-
-app.post('/api/password/update', async (req, res) => {
-    const { userId, senhaAtual, novaSenha } = req.body;
-
-    if (!userId || !senhaAtual || !novaSenha) {
-        return res.status(400).json({ success: false, message: 'Todos os campos de senha são obrigatórios.' });
-    }
-
-    try {
-        await User.updatePassword(userId, senhaAtual, novaSenha);
-        return res.status(200).json({ success: true, message: 'Senha alterada com sucesso!' });
-    } catch (error) {
-        console.error('Erro ao alterar senha:', error);
-        // Retorna 401 (Não Autorizado) se a senha atual estiver incorreta
-        return res.status(401).json({ success: false, message: error.message || 'Falha ao alterar senha.' });
-    }
-});
