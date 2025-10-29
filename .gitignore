@@ -2,3 +2,4 @@ PoliArtGen/.env
 PoliArtGen/src/js/test_connection.js
 PoliArtGen/src/js/temp_insert_test.js
 PoliArtGen/src/js/image_history_test.js
+PoliArtGen/node_modules/
