@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil</title>
+    <title>Perfil - PoliArtGen</title>
     <link rel="stylesheet" href="src/css/style.css">
     <link rel="icon" href="src/img/mascote_poliartgen.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -27,91 +27,128 @@
     </nav>
 
     <!-- CONTEÚDO PRINCIPAL -->
-    <main id="perfil-main">
-        <article id="perfil-article">
-            <!-- Header -->
-            <!-- <header class="perfil-header">
-                <h1 class="perfil-title">Meu Perfil</h1>
-                <p class="perfil-subtitle">Gerencie suas informações e configurações</p>
-            </header> -->
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-8 col-xl-7">
+                <main id="perfil-main">
+                    <article id="perfil-article">
+                        <!-- Informações do perfil -->
+                        <section class="perfil-section">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h2 class="perfil-section-title"><i class="fas fa-user"></i> Informações do Perfil</h2>
+                                    <p class="perfil-section-subtitle">Atualize suas informações pessoais</p>
+                                </div>
+                            </div>
 
-            <!-- Informações do perfil -->
-            <section class="perfil-section">
-                <h2 class="perfil-section-title"><i class="fas fa-user"></i> Informações do Perfil</h2>
-                <p class="perfil-section-subtitle">Atualize suas informações pessoais</p>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="perfil-avatar">
+                                        <div class="avatar-circle" id="avatar-inicial">S</div>
+                                        <div class="avatar-info">
+                                            <p class="avatar-name" id="perfil-nome">Sarah</p>
+                                            <p class="avatar-email" id="perfil-email">sarah@email.com</p>
+                                            <button class="perfil-btn secundario" id="btn-alterar-avatar">Alterar Avatar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-                <div class="perfil-avatar">
-                    <div class="avatar-circle" id="avatar-inicial">S</div>
-                    <div class="avatar-info">
-                        <p class="avatar-name" id="perfil-nome">Sarah</p>
-                        <p class="avatar-email" id="perfil-email">sarah@email.com</p>
-                        <button class="perfil-btn secundario" id="btn-alterar-avatar">Alterar Avatar</button>
-                    </div>
-                </div>
+                            <form class="perfil-form" id="form-dados">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label for="nome">Nome</label>
+                                        <input type="text" id="nome" value="Sarah">
+                                    </div>
+                                </div>
 
-                <form class="perfil-form" id="form-dados">
-                    <label for="nome">Nome</label>
-                    <input type="text" id="nome" value="Sarah">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label for="email">Email</label>
+                                        <input type="email" id="email" value="sarah@email.com">
+                                    </div>
+                                </div>
 
-                    <label for="email">Email</label>
-                    <input type="email" id="email" value="sarah@email.com">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <button type="submit" class="perfil-btn primario">Salvar Alterações</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </section>
 
-                    <button type="submit" class="perfil-btn primario">Salvar Alterações</button>
-                </form>
-            </section>
+                        <!-- Alterar senha -->
+                        <section class="perfil-section">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h2 class="perfil-section-title"><i class="fas fa-lock"></i> Alterar Senha</h2>
+                                    <p class="perfil-section-subtitle">Mantenha sua conta segura</p>
+                                </div>
+                            </div>
 
-            <!-- Alterar senha -->
-            <section class="perfil-section">
-                <h2 class="perfil-section-title"><i class="fas fa-lock"></i> Alterar Senha</h2>
-                <p class="perfil-section-subtitle">Mantenha sua conta segura</p>
+                            <form class="perfil-form" id="form-senha">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label for="senha-atual">Senha Atual</label>
+                                        <input type="password" id="senha-atual">
+                                    </div>
+                                </div>
 
-                <form class="perfil-form" id="form-senha">
-                    <label for="senha-atual">Senha Atual</label>
-                    <input type="password" id="senha-atual">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label for="nova-senha">Nova Senha</label>
+                                        <input type="password" id="nova-senha">
+                                    </div>
+                                </div>
 
-                    <label for="nova-senha">Nova Senha</label>
-                    <input type="password" id="nova-senha">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label for="confirma-senha">Confirme Nova Senha</label>
+                                        <input type="password" id="confirma-senha">
+                                    </div>
+                                </div>
 
-                    <label for="confirma-senha">Confirme Nova Senha</label>
-                    <input type="password" id="confirma-senha">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <button type="submit" class="perfil-btn primario">Atualizar Senha</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </section>
 
-                    <button type="submit" class="perfil-btn primario">Atualizar Senha</button>
-                </form>
-            </section>
+                        <!-- Zona de perigo -->
+                        <section class="perfil-section danger-zone">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h2 class="perfil-section-title"><i class="fas fa-exclamation-triangle"></i> Zona de Perigo</h2>
+                                    <p class="perfil-section-subtitle">Ações irreversíveis da conta</p>
+                                </div>
+                            </div>
 
-            <!-- Zona de perigo -->
-            <section class="perfil-section danger-zone">
-                <h2 class="perfil-section-title"><i class="fas fa-exclamation-triangle"></i> Zona de Perigo</h2>
-                <p class="perfil-section-subtitle">Ações irreversíveis da conta</p>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="perfil-warning">
+                                        <p>
+                                            Ao excluir sua conta, todos os seus dados e ilustrações serão permanentemente removidos.
+                                            Esta ação não pode ser desfeita.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
 
-                <div class="perfil-warning">
-                    <p>
-                        Ao excluir sua conta, todos os seus dados e ilustrações serão permanentemente removidos.
-                        Esta ação não pode ser desfeita.
-                    </p>
-                </div>
-
-                <button class="perfil-btn danger" id="btn-excluir-conta">Excluir Conta</button>
-            </section>
-        </article>
-    </main>
-
-    <!-- Importa o JS -->
-    <script src="src/js/perfil.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-
-<!-- vlibrass -->
-
-    <div vw class="enabled">
-        <div vw-access-button class="active"></div>
-        <div vw-plugin-wrapper>
-            <div class="vw-plugin-top-wrapper"></div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <button class="perfil-btn danger" id="btn-excluir-conta">Excluir Conta</button>
+                                </div>
+                            </div>
+                        </section>
+                    </article>
+                </main>
+            </div>
         </div>
     </div>
-    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-    <script>
-        new window.VLibras.Widget('https://vlibras.gov.br/app');
-    </script>
+
+    <!-- Modal de sucesso -->
     <div id="sucesso-modal" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-icon">
@@ -123,10 +160,13 @@
             <p id="modal-sucesso-mensagem">Sua operação foi concluída.</p>
         </div>
     </div>
-    
-    </body>
-    </html>
-</body>
 
+    <!-- Scripts -->
+    <script src="src/js/perfil.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- acessibilidade -->
+    <script src="https://app.embed.im/accessibility.js" defer></script>
+</body>
 
 </html>

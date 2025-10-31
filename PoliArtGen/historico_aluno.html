@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Histórico</title>
+    <title>Histórico - PoliArtGen</title>
 
     <link rel="stylesheet" href="src/css/style.css">
     <link rel="icon" href="src/img/mascote_poliartgen.png" type="image/png">
@@ -27,67 +27,84 @@
     </nav>
 
     <!-- CONTEÚDO PRINCIPAL -->
-    <main class="container" id="main-container">
-
-        <article id="historico-article">
-            <header class="historico-header">
-                <h1 class="historico-title">Histórico de Ilustrações</h1>
-                <p class="historico-subtitle">Veja suas criações anteriores ou comece uma nova geração</p>
-            </header>
-
-            <!-- CONTAINER PRINCIPAL -->
-            <section class="historico-content" id="historico-content">
-                <!-- Caso não existam ilustrações -->
-                <div class="historico-box" id="historico-vazio">
-                    <div class="historico-icon">
-                        <img src="src/img/icon_no_image.png" alt="Sem ilustrações">
-                    </div>
-                    <p class="historico-info">Nenhuma ilustração ainda</p>
-                    <p class="historico-instrucao">Comece criando sua primeira ilustração no gerador</p>
-                    <a href="pag_principal.html" class="historico-btn">Ir para o Gerador</a>
-                </div>
-
-                <!-- Caso existam ilustrações -->
-                <div class="historico-grid" id="historico-grid" style="display: none;">
-                    <!-- Exemplo de card -->
-                    <!-- Os cards reais serão preenchidos via JavaScript -->
-                    <div class="historico-card">
-                        <img src="src/img/exemplo_1.png" alt="Geração 1">
-                        <div class="historico-card-info">
-                            <p class="historico-card-titulo">“Cenário Futurista”</p>
-                            <p class="historico-card-data">Gerado em: 02/10/2025</p>
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-12 col-xl-11">
+                <main id="main-container">
+                    <article id="historico-article">
+                        <!-- HEADER -->
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <header class="historico-header">
+                                    <h1 class="historico-title">Histórico de Ilustrações</h1>
+                                    <p class="historico-subtitle">Veja suas criações anteriores ou comece uma nova geração</p>
+                                </header>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </section>
 
-            <!-- BOTÃO FINAL -->
-            <div class="historico-btn-container">
-                <a href="pag_principal.html" class="historico-btn">Ir para o Gerador</a>
+                        <!-- CONTAINER PRINCIPAL -->
+                        <section class="historico-content" id="historico-content">
+                            <!-- Caso não existam ilustrações -->
+                            <div class="row" id="historico-vazio">
+                                <div class="col-12">
+                                    <div class="historico-box">
+                                        <div class="historico-icon">
+                                            <img src="src/img/icon_no_image.png" alt="Sem ilustrações" class="img-fluid" style="max-width: 150px; height: auto;">
+                                        </div>
+                                        <p class="historico-info">Nenhuma ilustração ainda</p>
+                                        <p class="historico-instrucao">Comece criando sua primeira ilustração no gerador</p>
+                                        <a href="pag_principal.html" class="historico-btn">Ir para o Gerador</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Caso existam ilustrações -->
+                            <div class="row g-3" id="historico-grid" style="display: none;">
+                                <!-- Os cards reais serão preenchidos via JavaScript -->
+                                <!-- Exemplo de card -->
+                                <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+                                    <div class="historico-card h-100">
+                                        <div class="historico-card-img-wrapper">
+                                            <img src="src/img/exemplo_1.png" alt="Geração 1" class="img-fluid w-100">
+                                        </div>
+                                        <div class="historico-card-info">
+                                            <p class="historico-card-titulo">"Cenário Futurista"</p>
+                                            <p class="historico-card-data">Gerado em: 02/10/2025</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- BOTÃO FINAL -->
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <div class="historico-btn-container">
+                                    <a href="pag_principal.html" class="historico-btn">Ir para o Gerador</a>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </main>
             </div>
-        </article>
-    </main>
+        </div>
+    </div>
 
-
-    <footer id="historico-footer">
-        <p class="historico-footer-text">© 2025 PoliArtGen - Todos os direitos reservados</p>
+    <footer id="historico-footer" class="mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <p class="historico-footer-text">© 2025 PoliArtGen - Todos os direitos reservados</p>
+                </div>
+            </div>
+        </div>
     </footer>
 
     <script src="src/js/historico.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- vlibrass -->
-
-    <div vw class="enabled">
-        <div vw-access-button class="active"></div>
-        <div vw-plugin-wrapper>
-            <div class="vw-plugin-top-wrapper"></div>
-        </div>
-    </div>
-    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-    <script>
-        new window.VLibras.Widget('https://vlibras.gov.br/app');
-    </script>
+    <!-- acessibilidade -->
+    <script src="https://app.embed.im/accessibility.js" defer></script>
 </body>
 
 </html>

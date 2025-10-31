@@ -7,65 +7,81 @@
     <title>Cadastro - PoliGen</title>
     <link rel="stylesheet" href="src/css/style.css">
     <link rel="icon" href="src/img/mascote_poliartgen.png" type="image/png">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 
-<body>
-    <div class="gradiente-background">
+<body class="gradiente-background">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-8 col-xl-6">
+                <main class="login-container">
+                    <!-- Cabeçalho com logo + título -->
+                    <div class="login-header">
+                        <img src="src/img/mascote_poliartgen.png" alt="Logo PoliArtGen" class="logo-inline">
+                        <h1 id="title-principal">PoliArtGen</h1>
+                    </div>
 
-        <div class="login-container">
-            <!-- Cabeçalho com logo + título -->
-            <div class="login-header" style="justify-content: center;">
-                <img src="src/img/mascote_poliartgen.png" alt="Logo PoliArtGen" class="logo-inline">
-                <h1 id="title-principal">PoliArtGen</h1>
-            </div>
+                    <!-- Subtítulo -->
+                    <h3 class="subtitle-login" style="text-align: center;">Crie sua conta</h3>
 
-            <!-- Subtítulo reduzido -->
-            <p class="subtitle-login" style="text-align: center; font-size: 1rem; margin-top: -0.5rem;">
-                Crie sua conta
-            </p>
+                    <!-- Formulário -->
+                    <form id="cadastroForm" novalidate>
+                        <div class="row">
+                            <div class="col-12">
+                                <label for="nome">Nome completo</label>
+                                <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo"
+                                    required>
+                            </div>
+                        </div>
 
-            <!-- Formulário -->
-            <form id="cadastroForm" novalidate>
-                <label for="nome">Nome completo</label>
-                <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" required>
+                        <div class="row">
+                            <div class="col-12">
+                                <label for="email">E-mail</label>
+                                <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required>
+                            </div>
+                        </div>
 
-                <label for="email">E-mail</label>
-                <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required>
+                        <div class="row">
+                            <div class="col-12">
+                                <label for="senha">Senha</label>
+                                <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+                            </div>
+                        </div>
 
-                <label for="senha">Senha</label>
-                <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+                        <div class="row">
+                            <div class="col-12">
+                                <label for="confirmarSenha">Confirmar senha</label>
+                                <input type="password" id="confirmarSenha" name="confirmarSenha"
+                                    placeholder="Confirme sua senha" required>
+                            </div>
+                        </div>
 
-                <label for="confirmarSenha">Confirmar senha</label>
-                <input type="password" id="confirmarSenha" name="confirmarSenha" placeholder="Confirme sua senha"
-                    required>
+                        <div class="row">
+                            <div class="col-12">
+                                <button type="submit" class="btn-login">Cadastrar</button>
+                            </div>
+                        </div>
+                    </form>
 
-                <button type="submit" class="btn-login">Cadastrar</button>
-            </form>
-
-            <!-- Link para login -->
-            <div class="signup">
-                <p>Já tem uma conta? <a href="pag_login.html">Faça login</a></p>
+                    <!-- Link para login -->
+                    <div class="signup">
+                        <span>Já tem uma conta? </span>
+                        <a href="pag_login.html">Faça login</a>
+                    </div>
+                </main>
             </div>
         </div>
-
     </div>
 
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
     <script src="src/js/cadastro.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 
-
-<!-- vlibrass -->
-    <div vw class="enabled">
-        <div vw-access-button class="active"></div>
-        <div vw-plugin-wrapper>
-            <div class="vw-plugin-top-wrapper"></div>
-        </div>
-    </div>
-    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-    <script>
-        new window.VLibras.Widget('https://vlibras.gov.br/app');
-    </script>
+    <!-- acessibilidade -->
+    <script src="https://app.embed.im/accessibility.js" defer></script>
 </body>
 
 </html>
