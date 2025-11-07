@@ -7,15 +7,16 @@
     <title>PoliArtGen</title>
     <link rel="stylesheet" href="src/css/style.css">
     <link rel="icon" href="src/img/mascote_poliartgen.png" type="image/png">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 
-<body class="principal-body" class="gradiente-background">
+<body class="principal-body">
     <!-- NAVBAR -->
     <nav class="navbar" id="navbar-principal">
         <div class="logo-container">
-            <img src="src/img/poliedro-logo.png" alt="Logo Poliedro" class="logo-img-navbar">
-            <span class="logo-text">PoliArtGen</span>
+            <img src="src/img/image.png" alt="Logo Poliedro" class="logo-img-navbar">
+            <!-- <span class="logo-text">PoliArtGen</span> -->
         </div>
 
         <ul class="nav-links">
@@ -26,81 +27,114 @@
         </ul>
     </nav>
 
-
     <!-- CONTEÚDO PRINCIPAL -->
-    <main class="container" id="main-container">
-        <section class="formulario" id="form-gerador">
-            <h2>Criar Ilustração</h2>
-            <form id="formPrincipal">
-                <label for="materia">Matéria</label>
-                <select id="materia" name="materia">
-                    <option>Física</option>
-                    <option>Matemática</option>
-                    <option>Biologia</option>
-                    <option>História</option>
-                    <option>Geografia</option>
-                    <option>Química</option>
-                </select>
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <main id="main-container">
+                    <div class="row g-4">
+                        <!-- FORMULÁRIO (ocupa 2/3 em telas grandes) -->
+                        <div class="col-12 col-lg-8">
+                            <section class="formulario" id="form-gerador">
+                                <h2>Criar Ilustração</h2>
+                                <form id="formPrincipal">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <label for="materia">Matéria</label>
+                                            <select id="materia" name="materia">
+                                                <option>Física</option>
+                                                <option>Matemática</option>
+                                                <option>Biologia</option>
+                                                <option>História</option>
+                                                <option>Geografia</option>
+                                                <option>Química</option>
+                                            </select>
+                                        </div>
+                                    </div>
 
-                <label for="estilo">Estilo da Imagem</label>
-                <select id="estilo" name="estilo">
-                    <option>Realista</option>
-                    <option>Cartoon</option>
-                    <option>Minimalista</option>
-                    <option>Esquemático</option>
-                    <option>3D</option>
-                </select>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <label for="estilo">Estilo da Imagem</label>
+                                            <select id="estilo" name="estilo">
+                                                <option>Realista</option>
+                                                <option>Cartoon</option>
+                                                <option>Minimalista</option>
+                                                <option>Esquemático</option>
+                                                <option>3D</option>
+                                            </select>
+                                        </div>
+                                    </div>
 
-                <label for="topico">Tópico Específico</label>
-                <input type="text" id="topico" name="topico"
-                    placeholder="Ex: Lei de Ohm, Fotossíntese, Teorema de Pitágoras...">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <label for="topico">Tópico Específico</label>
+                                            <input type="text" id="topico" name="topico"
+                                                placeholder="Ex: Lei de Ohm, Fotossíntese, Teorema de Pitágoras...">
+                                        </div>
+                                    </div>
 
-                <label for="nivel">Nível Educacional</label>
-                <select id="nivel" name="nivel">
-                    <option>Ensino Fundamental I</option>
-                    <option>Ensino Fundamental II</option>
-                    <option>Ensino Médio</option>
-                </select>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <label for="nivel">Nível Educacional</label>
+                                            <select id="nivel" name="nivel">
+                                                <option>Ensino Fundamental I</option>
+                                                <option>Ensino Fundamental II</option>
+                                                <option>Ensino Médio</option>
+                                            </select>
+                                        </div>
+                                    </div>
 
-                <label for="detalhes">Detalhes Adicionais</label>
-                <textarea id="detalhes" name="detalhes"
-                    placeholder="Descrição adicional do que você gostaria de ver na imagem..."></textarea>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <label for="detalhes">Detalhes Adicionais</label>
+                                            <textarea id="detalhes" name="detalhes"
+                                                placeholder="Descrição adicional do que você gostaria de ver na imagem..."></textarea>
+                                        </div>
+                                    </div>
 
-                <button type="submit" class="btn-gerar" id="btn-gerar">⚡ Gerar Ilustração</button>
-            </form>
-        </section>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <button type="submit" class="btn-gerar" id="btn-gerar">⚡ Gerar
+                                                Ilustração</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </section>
+                        </div>
 
-        <aside class="resultado" id="resultado-geracao">
-            <div id="mascote-resultado">
-                <img src="src/img/mascote_poliartgen.png" alt="mascote_poliedro">
+                        <!-- RESULTADO (ocupa 1/3 em telas grandes) -->
+                        <div class="col-12 col-lg-4">
+                            <aside class="resultado" id="resultado-geracao">
+                                <div id="mascote-resultado">
+                                    <img src="src/img/mascote_poliartgen.png" alt="mascote_poliedro">
+                                </div>
+                                <h2>Resultado</h2>
+                                <div class="preview" id="preview-img">
+                                    <p>Sua ilustração aparecerá aqui</p>
+                                    <small>Preencha o formulário e clique em "Gerar Ilustração"</small>
+                                </div>
+                            </aside>
+                        </div>
+                    </div>
+                </main>
             </div>
-            <h2>Resultado</h2>
-            <div class="preview" id="preview-img">
-                <p>Sua ilustração aparecerá aqui</p>
-                <small>Preencha o formulário e clique em "Gerar Ilustração"</small>
-            </div>
-        </aside>
-
-    </main>
+        </div>
+    </div>
 
     <footer class="footer-principal" id="footer-principal">
         <p>&copy; 2025 - Direitos Reservados</p>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+
     <!-- Import do JS -->
     <script src="src/js/api.js"></script>
     <script src="src/js/main.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 
-
-<<<<<<< HEAD
     <!-- acessibilidade -->
     <script src="https://app.embed.im/accessibility.js" defer></script>
-=======
-
-<!-- vlibras -->
-<script src="https://app.embed.im/accessibility.js" defer></script>
->>>>>>> 559da4a14e0d597af312c61d8fe69133af5c89a1
 </body>
 
 </html>
