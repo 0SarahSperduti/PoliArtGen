@@ -3,7 +3,7 @@
 // ============================================
 
 const CONFIG = {
-  API_TOKEN: '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', 
+  API_TOKEN: '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', 
   MODEL_URL: 'https://router.huggingface.co/hf-inference/models/black-forest-labs/FLUX.1-schnell',
   TIMEOUT: 60000 // 60 segundos
 };
