@@ -52,7 +52,6 @@
   font-weight: 500;
   color: #666;
   margin-top: -1rem;
-  /* sobe o subtítulo para perto do título */
   margin-bottom: 1rem;
 }
 
@@ -453,8 +452,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start; 
   text-align: center;
+  overflow-y: auto; 
+  max-height: calc(100vh - 100px);
+  min-height: 695px;
 }
 
 .resultado h2 {
@@ -468,14 +470,15 @@
   border-radius: 1rem;
   padding: 2rem;
   width: 100%;
-  height: 320px;
+  min-height: 600px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start; 
   color: #666;
   font-size: 1rem;
   background: #fafafa;
+  overflow-y: auto;
 }
 
 #mascote-resultado {
@@ -1053,6 +1056,9 @@
   width: 100%;
   color: #333;
   font-size: 0.95rem;
+  max-height: 400px; 
+  overflow-y: auto; 
+  padding-right: 10px; 
 }
 
 .confirmacao-geracao h4 {
@@ -1076,7 +1082,9 @@
   display: flex;
   justify-content: center;
   gap: 1rem;
-  margin-top: 2rem;
+  margin-top: 1.5rem; 
+  width: 100%;
+  flex-wrap: wrap;
 }
 
 .botoes-confirmacao button {
@@ -1086,12 +1094,28 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
+  flex: 0 1 auto;
+}
+
+.download-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1rem; 
+  width: 100%;
+  padding: 0 10px; 
+}
+
+.download-buttons button {
+  flex: 0 1 auto; 
+  min-width: 120px; 
 }
 
 .btn-confirmar {
   background-color: #28a745;
-  /* Verde para confirmar */
   color: white;
+  padding: 6px 10px;
 }
 
 .btn-confirmar:hover {
@@ -1101,12 +1125,21 @@
 
 .btn-cancelar {
   background-color: #6c757d;
-  /* Cinza para cancelar */
   color: white;
+  padding: 6px 10px;
 }
 
 .btn-cancelar:hover {
   background-color: #5a6268;
+}
+
+#imagem-resultado {
+  max-width: 100%;
+  max-height: 400px; 
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  margin-bottom: 15px;
 }
 
 /* --- Estilo para a Mensagem de Sucesso --- */
