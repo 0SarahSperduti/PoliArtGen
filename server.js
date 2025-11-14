@@ -99,6 +99,61 @@ app.get('/api/history/:userId', async (req, res) => {
     }
 });
 
+// ===========================================================
+// 🗑️ ROTA PARA DELETAR IMAGEM DO HISTÓRICO (NOVA!)
+// ===========================================================
+app.delete('/api/history/:userId/:imageId', async (req, res) => {
+    const { userId, imageId } = req.params;
+
+    // Validação dos IDs
+    if (!userId || !mongoose.Types.ObjectId.isValid(userId)) {
+        return res.status(400).json({ 
+            success: false, 
+            message: 'ID de usuário inválido.' 
+        });
+    }
+
+    if (!imageId || !mongoose.Types.ObjectId.isValid(imageId)) {
+        return res.status(400).json({ 
+            success: false, 
+            message: 'ID de imagem inválido.' 
+        });
+    }
+
+    try {
+        // Busca e deleta a imagem
+        // Garante que apenas o dono pode deletar verificando o usuarioId
+        const imagemDeletada = await Image.findOneAndDelete({
+            _id: imageId,
+            usuarioId: userId
+        });
+
+        // Se não encontrou a imagem ou o usuário não é o dono
+        if (!imagemDeletada) {
+            return res.status(404).json({
+                success: false,
+                message: 'Imagem não encontrada ou você não tem permissão para deletá-la.'
+            });
+        }
+
+        console.log(`✅ Imagem deletada: ${imageId} do usuário ${userId}`);
+
+        // Sucesso!
+        return res.status(200).json({
+            success: true,
+            message: 'Imagem excluída com sucesso!',
+            imageId: imageId
+        });
+
+    } catch (error) {
+        console.error('❌ Erro ao deletar imagem:', error);
+        return res.status(500).json({
+            success: false,
+            message: 'Erro no servidor ao excluir imagem.'
+        });
+    }
+});
+
 // --- Perfil ---
 app.get('/api/profile/:userId', async (req, res) => {
     const userId = req.params.userId;
@@ -197,6 +252,7 @@ app.post('/api/gerar-imagem', async (req, res) => {
         res.status(500).json({ success: false, message: 'Erro ao gerar imagem.' });
     }
 });
+
 // ===========================================================
 // 💾 ROTA PARA SALVAR IMAGEM NO BANCO
 // ===========================================================
@@ -236,6 +292,7 @@ app.post('/api/save-image', async (req, res) => {
         });
     }
 });
+
 // ===========================================================
 // 🚀 INICIA SERVIDOR
 // ===========================================================
